@@ -1,4 +1,4 @@
-module mbas001
+module mcub001
 using Test
 using LinearAlgebra
 using Arpack
@@ -10,6 +10,7 @@ OmegaShift = (0.01*2*pi)^2;
 function test_ssit(f, reffs, tol = 0.001)
     K = DataDrop.retrieve_matrix(f, "/K")
     M = DataDrop.retrieve_matrix(f, "/M")
+    @info "Matrix size = $(size(K))"
     d,v,nconv = ssit(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, which=:SM, check=1)
     d = d .- OmegaShift;
     fs = real(sqrt.(complex(d)))/(2*pi)
