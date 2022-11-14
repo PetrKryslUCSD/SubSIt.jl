@@ -31,12 +31,11 @@ Keyword arguments
     successive  estimates of the eigenvalues (or not normalized if the 
     eigenvalues converge to zero).
 """
-function ssit(K, M; nev = 6, v0 = fill(eltype(K), 0, 0), tol = 1.0e-3, maxiter = 300, verbose=false, which=:SM, check=0) 
+function ssit(K, M; nev = 6, ncv=max(20, 2*nev+1), v0 = fill(eltype(K), 0, 0), tol = 1.0e-3, maxiter = 300, verbose=false, which=:SM, check=0) 
     @assert which == :SM
     @assert nev >= 1
     if size(v0) == (0, 0)
-        p = 2*nev
-        v0 = [i==j ? one(eltype(K)) : zero(eltype(K)) for i=1:size(K,1), j=1:p]
+        v0 = [i==j ? one(eltype(K)) : zero(eltype(K)) for i=1:size(K,1), j=1:ncv]
     end
     v = deepcopy(v0)
     @assert nev <= size(v0, 2)
@@ -61,7 +60,9 @@ function ssit(K, M; nev = 6, v0 = fill(eltype(K), 0, 0), tol = 1.0e-3, maxiter =
         ix = sortperm(real.(decomp.values))
         evalues = decomp.values[ix]
         evectors = decomp.vectors[:, ix]
-        v .= v * real.(evectors)
+        # v .= v * real.(evectors)
+        mul!(Mv, v, real.(evectors))
+        v, Mv = Mv, v
         lamb .= real.(evalues)
         for j = 1:nvecs
             if abs(lamb[j]) <= tol # zero eigenvalues
@@ -85,7 +86,7 @@ end
 
 function _mass_normalize!(v, M)
     for k in axes(v, 2)
-        v[:, k] ./= sqrt(v[:, k]' * M * v[:, k])
+        v[:, k] ./= @views sqrt(v[:, k]' * M * v[:, k])
     end
     v
 end
