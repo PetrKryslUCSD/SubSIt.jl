@@ -79,25 +79,30 @@ function ssit(K, M; nev = 6, ncv=max(20, 2*nev+1), v0 = fill(eltype(K), 0, 0), t
         for k in axes(Kv, 2)
             ThreadedSparseCSR.bmul!(view(Kv, :, k), K, view(v, :, k))
         end
-        # mul!(Kv, K, v)
         mul!(Mv, M, v)
+        for k in 1:nvecs
+            lamb[k] = dot(v[:, k], Kv[:, k]) / dot(v[:, k], Mv[:, k])
+        end
+        ix = sortperm(real.(lamb))
+        lamb .= lamb[ix]
         decomp = eigen(transpose(v)*Kv, transpose(v)*Mv)
         ix = sortperm(real.(decomp.values))
-        evalues = decomp.values[ix]
+        evalues = real.(decomp.values[ix])
         evectors = decomp.vectors[:, ix]
         # v .= v * real.(evectors)
         mul!(Mv, v, real.(evectors))
         v, Mv = Mv, v
-        lamb .= real.(evalues)
-        for j = 1:nvecs
-            if abs(lamb[j]) <= tol # zero eigenvalues
-                lamberr[j] = abs(lamb[j])
+        # @show leps =  sqrt(norm(lamb[1:nev] - real.(evalues)[1:nev]) / norm(lamb[1:nev]))
+        plamb .= evalues
+        for j in 1:nvecs
+            if abs(lamb[j]) <= tol  # zero eigenvalues
+                lamberr[j] = abs(lamb[j]) 
             else # non zero eigenvalues
-                lamberr[j] = abs(lamb[j] - plamb[j])/abs(lamb[j])
+                lamberr[j] = abs(lamb[j] - plamb[j]) / abs(plamb[j])
             end
-            converged[j] = lamberr[j] <= tol
         end
-        nconv = length(findall(converged[1:nev]))
+        converged .= (lamberr .<= tol)[1:nev]
+        nconv = length(findall(converged))
         verbose && println("nconv = $(nconv)")
         if nconv >= nev # converged on all requested eigenvalues
             break
