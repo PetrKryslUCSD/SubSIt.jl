@@ -41,7 +41,17 @@ function ssit(K, M; nev = 6, ncv=max(20, 2*nev+1), v0 = fill(eltype(K), 0, 0), t
     @assert which == :SM
     @assert nev >= 1
     if size(v0) == (0, 0)
-        v0 = [i==j ? one(eltype(K)) : zero(eltype(K)) for i=1:size(K,1), j=1:ncv]
+        v0 = fill(zero(eltype(K)), size(K,1), ncv)
+        for j in axes(M, 1)
+            v0[j, 1] = M[j, j]
+        end
+        dMK = diag(M) ./ diag(K)
+        ix = sortperm(dMK)
+        k = 1
+        for j in 2:ncv-1
+            v0[ix[k], j] = 1.0
+        end
+        v0[:, end] = rand(size(K,1))
     end
     v = deepcopy(v0)
     @assert nev <= size(v0, 2)
@@ -49,7 +59,7 @@ function ssit(K, M; nev = 6, ncv=max(20, 2*nev+1), v0 = fill(eltype(K), 0, 0), t
     plamb = zeros(nvecs)  # previous eigenvalue
     lamb = zeros(nvecs)
     lamberr = zeros(nvecs)
-    converged = falses(nvecs)  # not yet
+    converged = falses(nev)  # not yet
     niter = 0
     nconv = 0
     factor = cholesky(K)
