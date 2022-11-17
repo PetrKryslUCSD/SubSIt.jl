@@ -97,9 +97,10 @@ function ssit(K, M; nev = 6, ncv=max(20, 2*nev+1), v0 = fill(eltype(K), 0, 0), t
     return lamb[1:nev], Y[:, 1:nev], nconv, niter, lamberr
 end
 
-function __mass_normalize!(v, Mv)
+function __normalize!(v)
     for k in axes(v, 2)
-        v[:, k] .*= @views 1.0 / sqrt(dot(v[:, k], Mv[:, k]))
+        m = maximum(abs.(@view v[:, k]))
+        v[:, k] .*= 1.0 / m
     end
     v
 end
