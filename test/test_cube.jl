@@ -32,7 +32,7 @@ using Test
 using FinEtools
 using FinEtools.MeshExportModule
 using FinEtoolsDeforLinear
-using FinEtoolsDeforLinear.AlgoDeforLinearModule: ssit
+using SubSIt: ssit
 using LinearAlgebra
 using Arpack
 using DataDrop
@@ -46,7 +46,7 @@ na =  n1; nb =  n1; nh  = n1;
 neigvs = 20                   # how many eigenvalues
 OmegaShift = (0.01*2*pi)^2;
 
-function unit_cube_esnice_ssit(N, reffs, tol=0.001)
+function unit_cube_esnice_ssit(N, tol=0.001)
     na,nb,nh = N, N, N
     # println("""
     # Vibration modes of unit cube  of almost incompressible material.
@@ -70,12 +70,21 @@ function unit_cube_esnice_ssit(N, reffs, tol=0.001)
     associategeometry!(femm,  geom)
     K  = stiffness(femm, geom, u)
     M = mass(femm, geom, u)
-    @time d,v,nconv = eigs(K+OmegaShift*M, M; nev=neigvs)
+
+    @info "eigs"
+    @time d,v,nconv = eigs(K+OmegaShift*M, M; nev=neigvs, which=:SM, explicittransform=:none)
+    d = d .- OmegaShift;
+    fs = real(sqrt.(complex(d)))/(2*pi)
+    println("Eigenvalues: $fs [Hz]")
+    reffs = fs
+
+    @info "ssit"
     @time d,v,nconv = ssit(K+OmegaShift*M, M; nev=neigvs)
     d = d .- OmegaShift;
     fs = real(sqrt.(complex(d)))/(2*pi)
     println("Eigenvalues: $fs [Hz]")
-    @test norm(fs - reffs) < tol
+
+    @test norm(fs - reffs) / norm(reffs) < tol
 
     # mode = 17
     # scattersysvec!(u, v[:,mode])
@@ -85,11 +94,8 @@ function unit_cube_esnice_ssit(N, reffs, tol=0.001)
     true
 end # unit_cube_esnice
 
-for d in (
-    (8, [0.00000e+00, 0.00000e+00, 3.16833e-08, 1.09714e-07, 1.12730e-07, 1.87727e-07, 2.51509e-01, 2.56099e-01, 3.37083e-01, 3.39137e-01, 3.42637e-01, 3.48691e-01, 3.49059e-01, 3.50360e-01, 3.77199e-01, 3.96925e-01, 3.97760e-01, 4.27904e-01, 4.29469e-01, 4.30729e-01]),
-    (16, [0.00000e+00, 0.00000e+00, 1.39971e-07, 1.98557e-07, 2.46956e-07, 3.04491e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.57552e-01, 3.57918e-01, 3.99576e-01, 4.05492e-01, 4.05636e-01, 4.52988e-01, 4.53485e-01, 4.54343e-01])
-    )
-    unit_cube_esnice_ssit(d...)
+for N in (8, 16, 32)
+    unit_cube_esnice_ssit(N)
 end
 end # module 
 nothing
