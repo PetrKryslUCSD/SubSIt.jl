@@ -23,7 +23,12 @@ end
     include("test_cube.jl")
 end
 
+@testset "Truncated cylindrical solid shell" begin
+    include("test_trunc_cyl_shell.jl.jl")
+end
+
 @testset "Barrel shell" begin
     unzip("barrel_w_stiffeners-s3-mesh.zip")
     include("test_barrel.jl")
 end
+
