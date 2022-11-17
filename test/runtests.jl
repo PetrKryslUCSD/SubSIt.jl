@@ -20,7 +20,10 @@ function unzip(file,exdir="")
 end
 
 @testset "Incompressible cube" begin
-    unzip("unit_cube_8.zip")
-    unzip("unit_cube_16.zip")
     include("test_cube.jl")
+end
+
+@testset "Barrel shell" begin
+    unzip("barrel_w_stiffeners-s3-mesh.zip")
+    include("test_barrel.jl")
 end
