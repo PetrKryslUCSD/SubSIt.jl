@@ -24,7 +24,7 @@ end
 end
 
 @testset "Truncated cylindrical solid shell" begin
-    include("test_trunc_cyl_shell.jl.jl")
+    include("test_trunc_cyl_shell.jl")
 end
 
 @testset "Barrel shell" begin
