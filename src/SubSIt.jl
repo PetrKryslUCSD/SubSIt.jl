@@ -37,7 +37,7 @@ Keyword arguments
     successive  estimates of the eigenvalues (or not normalized if the 
     eigenvalues converge to zero).
 """
-function ssit(K, M; nev = 6, ncv=max(20, 2*nev+1), v0 = fill(eltype(K), 0, 0), tol = 1.0e-3, maxiter = 300, verbose=false, which=:SM, check=0) 
+function ssit(K, M; nev = 6, ncv=max(20, 2*nev+1), v0 = fill(eltype(K), 0, 0), tol = 1.0e-4, maxiter = 300, verbose=false, which=:SM, check=0) 
     @assert which == :SM
     @assert nev >= 1
     ncv = max(ncv, size(v0, 2))
@@ -70,6 +70,8 @@ function ssit(K, M; nev = 6, ncv=max(20, 2*nev+1), v0 = fill(eltype(K), 0, 0), t
     factor = cholesky(K)
     mul!(Y, M, X)
     for i = 1:maxiter
+        qrd = qr!(Y)
+        Y .= Matrix(qrd.Q)
         X .= factor \ Y
         mul!(Kr, transpose(X), Y)
         mul!(Y, M, X)
@@ -79,7 +81,7 @@ function ssit(K, M; nev = 6, ncv=max(20, 2*nev+1), v0 = fill(eltype(K), 0, 0), t
         evalues = real.(decomp.values[ix])
         evectors = decomp.vectors[:, ix]
         mul!(X, Y, real.(evectors))
-        __mass_normalize_M!(X, M)
+        # __mass_normalize_M!(X, M)
         X, Y = Y, X
         lamb .= evalues
         for j in 1:nvecs
@@ -87,7 +89,7 @@ function ssit(K, M; nev = 6, ncv=max(20, 2*nev+1), v0 = fill(eltype(K), 0, 0), t
         end
         converged .= (lamberr .<= tol)[1:nev]
         nconv = length(findall(converged))
-        verbose && println("nconv = $(nconv)")
+        verbose && println("maximum(lamberr)=$(maximum(lamberr[1:nev])), nconv = $(nconv)")
         if nconv >= nev # converged on all requested eigenvalues
             break
         end
