@@ -43,10 +43,10 @@ rho = 1*phun("KG/M^3");
 a = 1*phun("M"); b = a; h =  a;
 n1 = 16;# How many element edges per side?
 na =  n1; nb =  n1; nh  = n1;
-neigvs = 20                   # how many eigenvalues
+                  # how many eigenvalues
 OmegaShift = (0.01*2*pi)^2;
 
-function unit_cube_esnice_ssit(N, tol=0.001)
+function unit_cube_esnice_ssit(N, neigvs = 20, tol=0.001)
     na,nb,nh = N, N, N
     # println("""
     # Vibration modes of unit cube  of almost incompressible material.
@@ -71,18 +71,18 @@ function unit_cube_esnice_ssit(N, tol=0.001)
     K  = stiffness(femm, geom, u)
     M = mass(femm, geom, u)
 
-    @info "eigs"
+    @info "N=$(N), neigvs=$(neigvs), eigs"
     @time d,v,nconv = eigs(K+OmegaShift*M, M; nev=neigvs, which=:SM, explicittransform=:none)
     d = d .- OmegaShift;
     fs = real(sqrt.(complex(d)))/(2*pi)
-    println("Eigenvalues: $fs [Hz]")
+    # println("Eigenvalues: $fs [Hz]")
     reffs = fs
 
-    @info "ssit"
-    @time d,v,nconv = ssit(K+OmegaShift*M, M; nev=neigvs)
+    @info "N=$(N), neigvs=$(neigvs), ssit"
+    @time d,v,nconv = ssit(K+OmegaShift*M, M; nev=neigvs, verbose=true)
     d = d .- OmegaShift;
     fs = real(sqrt.(complex(d)))/(2*pi)
-    println("Eigenvalues: $fs [Hz]")
+    # println("Eigenvalues: $fs [Hz]")
 
     @test norm(fs - reffs) / norm(reffs) < tol
 
@@ -96,6 +96,11 @@ end # unit_cube_esnice
 
 for N in (8, 16, 32)
     unit_cube_esnice_ssit(N)
+end
+
+
+for N in (16, 32)
+    unit_cube_esnice_ssit(N, 500)
 end
 end # module 
 nothing
