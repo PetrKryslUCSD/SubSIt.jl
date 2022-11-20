@@ -95,12 +95,13 @@ function unit_cube_esnice_ssit(N, neigvs = 20, tol=0.001)
 end # unit_cube_esnice
 
 for N in (8, 16, 32)
-    unit_cube_esnice_ssit(N)
+    unit_cube_esnice_ssit(N, 20)
 end
 
 
-for N in (16, 32)
-    unit_cube_esnice_ssit(N, 500)
+for N in (32, )
+    unit_cube_esnice_ssit(N, 100)
+    # unit_cube_esnice_ssit(N, 500)
 end
 end # module 
 nothing

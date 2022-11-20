@@ -31,4 +31,3 @@ end
     unzip("barrel_w_stiffeners-s3-mesh.zip")
     include("test_barrel.jl")
 end
-
