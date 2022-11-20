@@ -37,28 +37,6 @@ Keyword arguments
     successive  estimates of the eigenvalues (or not normalized if the 
     eigenvalues converge to zero).
 """
-# function ssit(K, M; nev = 6, ncv=max(20, 2*nev+1), v0 = fill(eltype(K), 0, 0), tol = 1.0e-3, maxiter = 300, verbose=false, which=:SM, check=0) 
-#     @assert which == :SM
-#     @assert nev >= 1
-#     ncv = max(ncv, size(v0, 2))
-#     @assert nev < ncv
-#     nvecs = ncv
-#     if size(v0) == (0, 0)
-#         v0 = fill(zero(eltype(K)), size(K,1), nvecs)
-#         for j in axes(M, 1)
-#             v0[j, 1] = M[j, j]
-#         end
-#         dMK = diag(M) ./ diag(K)
-#         ix = sortperm(dMK)
-#         k = 1
-#         for j in 2:nvecs-1
-#             v0[ix[k], j] = 1.0
-#         end
-#         v0[:, end] = rand(size(K,1))
-#     end
-#     factor = cholesky(K)
-#     return _ssit(factor, M, nev, v0, tol, maxiter, verbose) 
-# end
 function ssit(K, M; nev = 6, ncv=0, X = fill(eltype(K), 0, 0), tol = 1.0e-3, maxiter = 300, verbose=false, which=:SM, check=0) 
     @assert which == :SM
     @assert nev >= 1
@@ -123,7 +101,6 @@ function _ssit(K, M, nev, X, tol, maxiter, verbose)
         evalues .= real.(@view decomp.values[ix])
         evectors .= real.(@view decomp.vectors[:, ix])
         mul!(X, Y, evectors)
-        # __mass_normalize_M!(X, M)
         X, Y = Y, X
         lamb .= evalues
         for j in 1:nvecs
@@ -141,23 +118,27 @@ function _ssit(K, M, nev, X, tol, maxiter, verbose)
     return lamb, Y, nconv, niter, lamberr
 end
 
-function __normalize!(v)
-    for k in axes(v, 2)
-        m = maximum(abs.(@view v[:, k]))
-        v[:, k] .*= 1.0 / m
-    end
-    v
 end
 
-function __mass_normalize_M!(v, M)
-    for k in axes(v, 2)
-        v[:, k] ./= @views sqrt(v[:, k]' * M * v[:, k])
-    end
-    v
-end
-
-# min(nev*2, nev+8)
-
-
-
-end
+# function ssit(K, M; nev = 6, ncv=max(20, 2*nev+1), v0 = fill(eltype(K), 0, 0), tol = 1.0e-3, maxiter = 300, verbose=false, which=:SM, check=0) 
+#     @assert which == :SM
+#     @assert nev >= 1
+#     ncv = max(ncv, size(v0, 2))
+#     @assert nev < ncv
+#     nvecs = ncv
+#     if size(v0) == (0, 0)
+#         v0 = fill(zero(eltype(K)), size(K,1), nvecs)
+#         for j in axes(M, 1)
+#             v0[j, 1] = M[j, j]
+#         end
+#         dMK = diag(M) ./ diag(K)
+#         ix = sortperm(dMK)
+#         k = 1
+#         for j in 2:nvecs-1
+#             v0[ix[k], j] = 1.0
+#         end
+#         v0[:, end] = rand(size(K,1))
+#     end
+#     factor = cholesky(K)
+#     return _ssit(factor, M, nev, v0, tol, maxiter, verbose) 
+# end
