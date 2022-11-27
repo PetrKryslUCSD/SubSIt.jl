@@ -4,9 +4,6 @@ using LinearAlgebra
 using SparseArrays
 # using MKLSparse
 import SparseArrays: findnz
-# using ThreadedSparseCSR
-
-findnz(A::T) where {T<:LinearAlgebra.Symmetric{Float64, SparseArrays.SparseMatrixCSC{Float64, Int64}}}  = findnz(A.data)
 
 """
     ssit(K, M; nev = 6, ncv=0, tol = 2.0e-3, maxiter = 300, verbose=false, which=:SM, X = fill(eltype(K), 0, 0), check=0, ritzvec=true, sigma=0.0) 
@@ -144,62 +141,21 @@ function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose)
     return lamb, Y, nconv, niter, lamberr
 end
 
-function gsqr!(A)
+function mgsqr!(A, R)
     @show n = size(A, 2)
-    R = fill(zero(eltype(A)), n, n); # initialize R
-    
-    for col in 1:n # for the first, second, third, ..., m-th column of Q
-        R[col,col] = norm(A[:,col]);
-        if (abs(R[col,col]) <= 0)# < eps(one(eltype(A))))
-            @show R
-            error("Matrix is singular");
+    R .= zero(eltype(A))
+    for j in 1:n 
+        for i in 1:j-1
+            rij = R[i, j]
+            rij += dot(view(A, :, i), view(A, :, j))
+            A[:, j] .-= rij .* @view A[:, i]
         end
-        A[:,col] ./= R[col,col]; # normalize column
-        for ncol in col+1:n
-            R[col,ncol] = dot(A[:,col], A[:,ncol]);
-            A[:,ncol] -= R[col,ncol] .* A[:,col]; # subtract projection
-        end
+        rjj = norm(@view A[:, j]);
+        A[:, j] ./= rjj; 
+        R[j, j] = rjj
     end
     return A
 end
-
-function gramschmidt!(U)
-n,k = size(U);
-U = zeros(n,k);
-U[:,1] = U[:,1]/norm(U[:,1]);
-for i = 2:k
-    for j=1:i-1
-        U[:,i]=U[:,i]-(U[:,j]'*U[:,i]) * U[:,j];
-    end
-    U[:,i] = U[:,i]/norm(U[:,i]);
-end
-end
-
-# function [Q,R] = gsqr (A)
-#     % Check that the input matrix is square
-#     [m,n] = size(A);
-#     if (m < n)
-#         disp('Error: matrix A has not sufficient rank: more columns than rows');
-#         Q = zeros(m,n); % return something initialized
-#         R = eye(m,n); % return something initialized
-#         return
-#     end
-    
-#     R = zeros(n,n); % initialize R
-    
-#     for col = 1:n % for the first, second, third, ..., m-th column of Q
-#         R(col,col) = norm(A(:,col));
-#         if (abs(R(col,col)) < eps)
-#             error(['Matrix is singular']);
-#         end
-#         A(:,col) = A(:,col)/R(col,col); % normalize column
-#         for ncol = col+1:n
-#             R(col,ncol) = A(:,col)'*A(:,ncol);
-#             A(:,ncol) = A(:,ncol) -  R(col,ncol) * A(:,col); % subtract projection
-#         end
-#     end
-#     Q=A; % output Q
-# end
 
 end
 
