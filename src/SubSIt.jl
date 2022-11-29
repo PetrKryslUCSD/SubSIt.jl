@@ -5,6 +5,102 @@ using SparseArrays
 # using MKLSparse
 import SparseArrays: findnz
 
+
+function __coldot(A, j, i)
+    m = size(A, 1)
+    r = zero(eltype(A))
+    @simd for k in 1:m
+        r += A[k, i] * A[k, j]
+    end
+    return r; 
+end
+
+function __colnorm(A, j)
+    return sqrt(__coldot(A, j, j)); 
+end
+
+function colsubt!(A, i, j, r)
+    m = size(A, 1)
+    @simd for k in 1:m
+        A[k, i] -= r * A[k, j]
+    end
+end
+
+function __normalizecol!(A, j)
+    m = size(A, 1)
+    r = 1.0 / __colnorm(A, j)
+    @simd for k in 1:m
+        A[k, j] *= r
+    end
+end
+
+function __mgsortho!(A)
+    m, n = size(A)
+    __normalizecol!(A, 1)
+    for j in 2:n 
+        Base.Threads.@threads for i in j:n
+            colsubt!(A, i, j-1, __coldot(A, j-1, i))
+        end
+        __normalizecol!(A, j)
+    end
+    return A
+end
+
+function __mgsorthol3!(A)
+    m, n = size(A)
+    r = fill(zero(eltype(A)), 1, n)
+    __normalizecol!(A, 1)
+    for j in 2:n 
+        vr = view(r, 1:1, j:n)
+        vAc = view(A, :, j-1:j-1)
+        vAb = view(A, :, j:n)
+        mul!(vr, transpose(vAc), vAb)
+        mul!(vAb, vAc, vr, -1.0, 1.0)
+        __normalizecol!(A, j)
+    end
+    return A
+end
+
+function __mgsortho3thr!(A; block_size = 32)
+    m, n = size(A)
+    num_blocks, rem_block = divrem(n, block_size)
+    work = zeros(eltype(A), block_size, n)
+    @views for b = 0:(num_blocks - 1)
+        c0 = block_size * b + 1
+        c1 = block_size * (b + 1)
+        A1 = A[:, c0:c1]
+        A2 = A[:, (c1 + 1):n]
+        work2 = work[:, (c1 + 1):n]
+        __mgsortho!(A1)
+        mul!(work2, A1', A2, one(eltype(A)), zero(eltype(A)))
+        mul!(A2, A1, work2, -one(eltype(A)), one(eltype(A)))
+    end
+    if rem_block != 0
+        __mgsortho!(@views A[:, (end - rem_block + 1):end])
+    end
+    return A
+end
+
+function __mgsortho3!(A; block_size = 32)
+    m, n = size(A)
+    num_blocks, rem_block = divrem(n, block_size)
+    work = zeros(eltype(A), block_size, n)
+    @views for b = 0:(num_blocks - 1)
+        c0 = block_size * b + 1
+        c1 = block_size * (b + 1)
+        A1 = A[:, c0:c1]
+        A2 = A[:, (c1 + 1):n]
+        work2 = work[:, (c1 + 1):n]
+        __mgsorthol3!(A1)
+        mul!(work2, A1', A2, one(eltype(A)), zero(eltype(A)))
+        mul!(A2, A1, work2, -one(eltype(A)), one(eltype(A)))
+    end
+    if rem_block != 0
+        __mgsorthol3!(@views A[:, (end - rem_block + 1):end])
+    end
+    return A
+end
+
 """
     ssit(K, M; nev = 6, ncv=0, tol = 2.0e-3, maxiter = 300, verbose=false, which=:SM, X = fill(eltype(K), 0, 0), check=0, ritzvec=true, sigma=0.0) 
 
@@ -109,12 +205,15 @@ function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose)
     lamberr = fill(zero(eltype(K)), nvecs)
     converged = falses(nvecs)  # not yet
     nconv = 0
+    __qr! = (Threads.nthreads() > 1 ?
+        __mgsortho3thr! :
+        __mgsortho3!)
 
     niter = 0
     mul!(Y, M, X)
+    qrd = qr!(Y)
+    Y .= Matrix(qrd.Q)
     for i in iter:maxiter
-        qrd = qr!(Y)
-        Y .= Matrix(qrd.Q)
         X .= K \ Y
         mul!(Kr, Transpose(X), Y)
         mul!(Y, M, X)
@@ -135,27 +234,16 @@ function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose)
         if nconv >= nev # converged on all requested eigenvalues
             break
         end
+        __qr!(Y)
+        # qrd = qr!(Y)
+        # Y .= Matrix(qrd.Q)
+        # @show norm(Y'*Y - LinearAlgebra.I, Inf)
         lamb, plamb = plamb, lamb
         niter = niter + 1
     end
     return lamb, Y, nconv, niter, lamberr
 end
 
-function mgsqr!(A, R)
-    @show n = size(A, 2)
-    R .= zero(eltype(A))
-    for j in 1:n 
-        for i in 1:j-1
-            rij = R[i, j]
-            rij += dot(view(A, :, i), view(A, :, j))
-            A[:, j] .-= rij .* @view A[:, i]
-        end
-        rjj = norm(@view A[:, j]);
-        A[:, j] ./= rjj; 
-        R[j, j] = rjj
-    end
-    return A
-end
 
 end
 
