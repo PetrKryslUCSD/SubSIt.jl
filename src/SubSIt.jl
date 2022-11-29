@@ -48,6 +48,7 @@ end
 
 function __mgsorthol3!(A)
     m, n = size(A)
+    _one = one(eltype(A))
     r = fill(zero(eltype(A)), 1, n)
     __normalizecol!(A, 1)
     for j in 2:n 
@@ -55,7 +56,7 @@ function __mgsorthol3!(A)
         vAc = view(A, :, j-1:j-1)
         vAb = view(A, :, j:n)
         mul!(vr, transpose(vAc), vAb)
-        mul!(vAb, vAc, vr, -1.0, 1.0)
+        mul!(vAb, vAc, vr, -_one, _one)
         __normalizecol!(A, j)
     end
     return A
@@ -63,6 +64,8 @@ end
 
 function __mgsortho3thr!(A; block_size = 32)
     m, n = size(A)
+    _one = one(eltype(A))
+    _zero = zero(eltype(A))
     num_blocks, rem_block = divrem(n, block_size)
     work = zeros(eltype(A), block_size, n)
     @views for b = 0:(num_blocks - 1)
@@ -72,8 +75,8 @@ function __mgsortho3thr!(A; block_size = 32)
         A2 = A[:, (c1 + 1):n]
         work2 = work[:, (c1 + 1):n]
         __mgsortho!(A1)
-        mul!(work2, A1', A2, one(eltype(A)), zero(eltype(A)))
-        mul!(A2, A1, work2, -one(eltype(A)), one(eltype(A)))
+        mul!(work2, A1', A2, _one, _zero)
+        mul!(A2, A1, work2, -_one, _one)
     end
     if rem_block != 0
         __mgsortho!(@views A[:, (end - rem_block + 1):end])
@@ -83,6 +86,8 @@ end
 
 function __mgsortho3!(A; block_size = 32)
     m, n = size(A)
+    _one = one(eltype(A))
+    _zero = zero(eltype(A))
     num_blocks, rem_block = divrem(n, block_size)
     work = zeros(eltype(A), block_size, n)
     @views for b = 0:(num_blocks - 1)
@@ -92,8 +97,8 @@ function __mgsortho3!(A; block_size = 32)
         A2 = A[:, (c1 + 1):n]
         work2 = work[:, (c1 + 1):n]
         __mgsorthol3!(A1)
-        mul!(work2, A1', A2, one(eltype(A)), zero(eltype(A)))
-        mul!(A2, A1, work2, -one(eltype(A)), one(eltype(A)))
+        mul!(work2, A1', A2, _one, _zero)
+        mul!(A2, A1, work2, -_one, _one)
     end
     if rem_block != 0
         __mgsorthol3!(@views A[:, (end - rem_block + 1):end])
@@ -185,12 +190,18 @@ end
 """
     ss_iterate(K, M, nev, X, tol, maxiter, verbose) 
 
-Iterate subspace.
-
 Iterate eigenvector subspace of the generalized eigenvalue problem
 `K*X=M*X*Lambda`.
 
-`K` = factorization of the stiffness matrix,
+* `K` = _factorization_ of the (mass-shifted) stiffness matrix,
+* `M` =  square symmetric mass matrix,
+* `nev` = the number of eigenvalues sought,
+* `X` =  initial guess of the eigenvectors, of dimension `size(M, 1)`x`ncv`,
+    where `ncv > nev` = number of iteration vectors,
+* `tol` = relative tolerance on the eigenvalue, expressed in terms of norms 
+      of the change of the eigenvalue estimates from iteration to iteration.
+* `maxiter` =  maximum number of allowed iterations (default 300),
+* `verbose` = verbose? (default is false).
 """
 function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose) 
     nvecs = size(X, 2)
