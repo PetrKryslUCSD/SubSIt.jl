@@ -30,7 +30,7 @@ function __normalizecol!(A, j)
     end
 end
 
-function __mgsortho!(A)
+function __mgsthr!(A)
     m, n = size(A)
     __normalizecol!(A, 1)
     for j in 2:n 
@@ -42,7 +42,7 @@ function __mgsortho!(A)
     return A
 end
 
-function __mgsorthol3!(A)
+function __mgsl3!(A)
     m, n = size(A)
     _one = one(eltype(A))
     r = fill(zero(eltype(A)), 1, n)
@@ -58,7 +58,7 @@ function __mgsorthol3!(A)
     return A
 end
 
-function __mgsortho3thr!(A; block_size = 32)
+function __mgs3thr!(A; block_size = 32)
     m, n = size(A)
     _one = one(eltype(A))
     _zero = zero(eltype(A))
@@ -70,17 +70,17 @@ function __mgsortho3thr!(A; block_size = 32)
         A1 = A[:, c0:c1]
         A2 = A[:, (c1 + 1):n]
         work2 = work[:, (c1 + 1):n]
-        __mgsortho!(A1)
+        __mgsthr!(A1)
         mul!(work2, A1', A2, _one, _zero)
         mul!(A2, A1, work2, -_one, _one)
     end
     if rem_block != 0
-        __mgsortho!(@views A[:, (end - rem_block + 1):end])
+        __mgsthr!(@views A[:, (end - rem_block + 1):end])
     end
     return A
 end
 
-function __mgsortho3!(A; block_size = 32)
+function __mgs3!(A; block_size = 32)
     m, n = size(A)
     _one = one(eltype(A))
     _zero = zero(eltype(A))
@@ -92,14 +92,23 @@ function __mgsortho3!(A; block_size = 32)
         A1 = A[:, c0:c1]
         A2 = A[:, (c1 + 1):n]
         work2 = work[:, (c1 + 1):n]
-        __mgsorthol3!(A1)
+        __mgsl3!(A1)
         mul!(work2, A1', A2, _one, _zero)
         mul!(A2, A1, work2, -_one, _one)
     end
     if rem_block != 0
-        __mgsorthol3!(@views A[:, (end - rem_block + 1):end])
+        __mgsl3!(@views A[:, (end - rem_block + 1):end])
     end
     return A
+end
+
+function computeQ!(A)
+  m, n = size(A)
+  k = min(m, n)
+  tau = zeros(eltype(A), k)
+  LAPACK.geqrf!(A, tau)
+  LAPACK.orgqr!(A, tau, k)
+  return A
 end
 
 """
