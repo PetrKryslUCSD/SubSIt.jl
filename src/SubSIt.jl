@@ -1,10 +1,6 @@
 module SubSIt
 
 using LinearAlgebra
-using SparseArrays
-# using MKLSparse
-import SparseArrays: findnz
-
 
 function __coldot(A, j, i)
     m = size(A, 1)
