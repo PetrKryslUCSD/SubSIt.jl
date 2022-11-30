@@ -26,7 +26,6 @@ using FinEtoolsFlexStructures.RotUtilModule: initial_Rfield, update_rotation_fie
 using DataDrop
 using DataDrop: with_extension
 using SubSIt: ssit
-# using KrylovKit
 using FinEtools.MeshExportModule.VTKWrite: vtkwrite
 
 function _execute_model(formul, input, visualize = true)
@@ -105,28 +104,6 @@ function _execute_model(formul, input, visualize = true)
     neigvs = 40
 
     tim = @elapsed begin
-        evals, evecs, convinfo = ssit(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, verbose=true)
-    end
-    @show convinfo
-    evals[:] = evals .- OmegaShift;
-    fs = real(sqrt.(complex(evals)))/(2*pi)
-    @info "Frequencies: $(round.(fs[7:15], digits=4))"
-    reffs = fs
-
-    @info "SubSIt: Time $tim [sec]"
-
-    tim = @elapsed begin
-        evals, evecs, convinfo = ssit(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, X = rand(size(K, 1), neigvs*2), verbose=true)
-    end
-    @show convinfo
-    evals[:] = evals .- OmegaShift;
-    fs = real(sqrt.(complex(evals)))/(2*pi)
-    @info "Frequencies: $(round.(fs[7:15], digits=4))"
-    reffs = fs
-
-    @info "SubSIt w/ initial guess: Time $tim [sec]"
-
-    tim = @elapsed begin
         evals, evecs, convinfo = eigs(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, which=:SM, explicittransform=:none)
     end
     @show convinfo
@@ -134,8 +111,29 @@ function _execute_model(formul, input, visualize = true)
     fs = real(sqrt.(complex(evals)))/(2*pi)
     @info "Frequencies: $(round.(fs[7:15], digits=4))"
     @info "Arpack: Time $tim [sec]"
+    reffs = fs
+    
 
-    @test norm(reffs - fs) / norm(reffs) < 1.0e-3
+    tim = @elapsed begin
+        evals, evecs, convinfo = ssit(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, tol=0.001, verbose=true)
+    end
+    @show convinfo
+    evals[:] = evals .- OmegaShift;
+    fs = real(sqrt.(complex(evals)))/(2*pi)
+    @info "Frequencies: $(round.(fs[7:15], digits=4))"
+    @info "SubSIt: Time $tim [sec]"
+    @test norm(reffs - fs, Inf) / norm(reffs, Inf) < 2.0e-3
+
+
+    tim = @elapsed begin
+        evals, evecs, convinfo = ssit(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, X = rand(size(K, 1), neigvs*2), tol=0.001, verbose=true)
+    end
+    @show convinfo
+    evals[:] = evals .- OmegaShift;
+    fs = real(sqrt.(complex(evals)))/(2*pi)
+    @info "Frequencies: $(round.(fs[7:15], digits=4))"
+    @info "SubSIt w/ initial guess: Time $tim [sec]"
+    @test norm(reffs - fs, Inf) / norm(reffs, Inf) < 2.0e-3
 
     return true
 end
