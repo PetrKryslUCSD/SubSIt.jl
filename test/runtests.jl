@@ -1,6 +1,7 @@
 using SubSIt
 using Test
 using ZipFile
+using MKL
 
 function unzip(file,exdir="")
     fileFullPath = isabspath(file) ?  file : joinpath(pwd(),file)
