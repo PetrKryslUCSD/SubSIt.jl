@@ -158,17 +158,7 @@ function ssit(K, M; nev = 6, ncv=0, tol = 2.0e-3, maxiter = 300, verbose=false, 
     _nev = max(Int(round(nev/4)+1), 20)
     ncv = ncv_tactics(_nev)
     if size(X) == (0, 0)
-        X = fill(zero(eltype(K)), size(K,1), ncv)
-        for j in axes(M, 1)
-            X[j, 1] = M[j, j]
-        end
-        dMK = diag(M) ./ diag(K)
-        ix = sortperm(dMK)
-        k = 1
-        for j in 2:ncv-1
-            X[ix[k], j] = 1.0
-        end
-        X[:, end] = rand(size(K,1))
+        X = rand(eltype(M), (size(M, 1), ncv))  
     else
         ncv = size(X, 2)
         ncv < nev+1 && error("Insufficient number of iteration vectors")
