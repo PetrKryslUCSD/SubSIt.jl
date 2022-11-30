@@ -211,14 +211,11 @@ function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose)
     lamberr = fill(zero(eltype(K)), nvecs)
     converged = falses(nvecs)  # not yet
     nconv = 0
-    __qr! = (Threads.nthreads() > 1 ?
-        __mgsortho3thr! :
-        __mgsortho3!)
+    __fastapproxqr! = (Threads.nthreads() > 1 ? __mgs3thr! : __mgs3!)
 
     niter = 0
     mul!(Y, M, X)
-    qrd = qr!(Y)
-    Y .= Matrix(qrd.Q)
+    computeQ!(Y)
     for i in iter:maxiter
         X .= K \ Y
         mul!(Kr, Transpose(X), Y)
@@ -240,10 +237,7 @@ function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose)
         if nconv >= nev # converged on all requested eigenvalues
             break
         end
-        __qr!(Y)
-        # qrd = qr!(Y)
-        # Y .= Matrix(qrd.Q)
-        # @show norm(Y'*Y - LinearAlgebra.I, Inf)
+        __fastapproxqr!(Y)
         lamb, plamb = plamb, lamb
         niter = niter + 1
     end
