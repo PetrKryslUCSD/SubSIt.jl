@@ -103,13 +103,35 @@ function __mgs3!(A; block_size = 32)
 end
 
 function computeQ!(A)
-  m, n = size(A)
-  k = min(m, n)
-  tau = zeros(eltype(A), k)
-  LAPACK.geqrf!(A, tau)
-  LAPACK.orgqr!(A, tau, k)
-  return A
+    m, n = size(A)
+    k = min(m, n)
+    tau = zeros(eltype(A), k)
+    LAPACK.geqrf!(A, tau)
+    LAPACK.orgqr!(A, tau, k)
+    return A
 end
+
+
+function computeQT!(A; nb = 32)
+    m, n = size(A)
+    k = min(m, n)
+    T = zeros(eltype(A), nb, k)
+    tau = zeros(eltype(A), k)
+    LAPACK.geqrt!(A, T)
+    b = Int(ceil(k / nb))
+    ib = k - (b - 1) * nb
+    for l = 1:(b - 1)
+        for j = 1:nb
+            tau[(l - 1) * nb + j] = T[j, (l - 1) * nb + j]
+        end
+    end
+    for j = 1:ib
+        tau[(b - 1) * nb + j] = T[j, (b - 1) * nb + j]
+    end
+    LAPACK.orgqr!(A, tau, k)
+    return A
+end
+
 
 """
     ssit(K, M; nev = 6, ncv=0, tol = 2.0e-3, maxiter = 300, verbose=false, which=:SM, X = fill(eltype(K), 0, 0), check=0, ritzvec=true, sigma=0.0) 
@@ -215,7 +237,7 @@ function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose)
 
     niter = 0
     mul!(Y, M, X)
-    computeQ!(Y)
+    computeQT!(Y)
     for i in iter:maxiter
         X .= K \ Y
         mul!(Kr, Transpose(X), Y)
