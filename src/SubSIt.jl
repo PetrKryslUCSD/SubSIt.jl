@@ -226,8 +226,7 @@ function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose)
     Y = deepcopy(X)
     Kr = fill(zero(eltype(K)), nvecs, nvecs)
     Mr = fill(zero(eltype(K)), nvecs, nvecs)
-    evalues = fill(zero(eltype(K)), nvecs)
-    evectors = fill(zero(eltype(K)), nvecs, nvecs)
+    Pr = fill(zero(eltype(K)), nvecs, nvecs)
     plamb = fill(zero(eltype(K)), nvecs) .+ Inf
     lamb = fill(zero(eltype(K)), nvecs)
     lamberr = fill(zero(eltype(K)), nvecs)
@@ -236,34 +235,31 @@ function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose)
     __fastapproxqr! = (Threads.nthreads() > 1 ? __mgs3thr! : __mgs3!)
 
     niter = 0
-    mul!(Y, M, X)
-    computeQT!(Y)
+    Z = X #  Z ← Xₖ
     for i in iter:maxiter
-        X .= K \ Y
-        mul!(Kr, Transpose(X), Y)
-        mul!(Y, M, X)
-        mul!(Mr, Transpose(X), Y)
+        mul!(Y, M, Z) # Y ← M Xₖ
+        Z .= K \ Y # Z ← ̅Xₖ₊₁ 
+        mul!(Kr, Transpose(Z), Y) # ← ̅Xₖ₊₁ᵀ K ̅Xₖ₊₁ = ̅Xₖ₊₁ᵀ M Xₖ
+        mul!(Y, M, Z) # Y ← M̅Xₖ₊₁
+        mul!(Mr, Transpose(Z), Y) # ← ̅Xₖ₊₁ᵀ M ̅Xₖ₊₁
         decomp = eigen(Kr, Mr)
         ix = sortperm(real.(decomp.values))
-        evalues .= real.(@view decomp.values[ix])
-        evectors .= real.(@view decomp.vectors[:, ix])
-        mul!(X, Y, evectors)
-        X, Y = Y, X
-        lamb .= evalues
-        for j in 1:nvecs
-            lamberr[j] = abs(lamb[j] - plamb[j]) / abs(plamb[j])
-        end
+        lamb .= real.(@view decomp.values[ix])
+        Pr .= real.(@view decomp.vectors[:, ix])
+        mul!(Y, Z, Pr) #  Xₖ₊₁ ← ̅Xₖ₊₁ Pᵣ
+        __fastapproxqr!(Y) # orthonormalize the vectors in the subspace
+        Z, Y = Y, Z # Z ←  Xₖ₊₁, Y is scratch space
+        @. lamberr = abs(lamb - plamb) / abs(plamb)
         converged .= (lamberr .<= tol)
         nconv = length(findall(converged))
         verbose && println("Iteration $i: nconv = $(nconv)")
         if nconv >= nev # converged on all requested eigenvalues
             break
         end
-        __fastapproxqr!(Y)
         lamb, plamb = plamb, lamb
         niter = niter + 1
     end
-    return lamb, Y, nconv, niter, lamberr
+    return lamb, Z, nconv, niter, lamberr
 end
 
 
