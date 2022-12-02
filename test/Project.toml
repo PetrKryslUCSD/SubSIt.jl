@@ -1,4 +1,5 @@
 [deps]
+ArnoldiMethod = "ec485272-7323-5ecc-a04f-4719b315124d"
 Arpack = "7d9fca2a-8960-54d3-9f78-7d1dccf2cb97"
 DataDrop = "aa547a04-dd37-49ab-8e73-656744f8a8fc"
 FinEtools = "91bb5406-6c9a-523d-811d-0644c4229550"
