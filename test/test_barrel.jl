@@ -115,7 +115,7 @@ function _execute_model(formul, input, visualize = true)
     
 
     tim = @elapsed begin
-        evals, evecs, convinfo = ssit(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, tol=0.001, verbose=true)
+        evals, evecs, convinfo = ssit(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, verbose=true)
     end
     @show convinfo
     evals[:] = evals .- OmegaShift;
@@ -126,7 +126,7 @@ function _execute_model(formul, input, visualize = true)
 
 
     tim = @elapsed begin
-        evals, evecs, convinfo = ssit(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, X = rand(size(K, 1), neigvs*2), tol=0.001, verbose=true)
+        evals, evecs, convinfo = ssit(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, X = rand(size(K, 1), neigvs*2), verbose=true)
     end
     @show convinfo
     evals[:] = evals .- OmegaShift;

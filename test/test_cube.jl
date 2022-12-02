@@ -19,7 +19,8 @@ na =  n1; nb =  n1; nh  = n1;
                   # how many eigenvalues
 OmegaShift = (0.01*2*pi)^2;
 
-function unit_cube_esnice_ssit(N, neigvs = 20, tol=0.001)
+function unit_cube_esnice_ssit(N, neigvs = 20)
+    tol = 0.001
     na,nb,nh = N, N, N
     # println("""
     # Vibration modes of unit cube  of almost incompressible material.
@@ -89,5 +90,6 @@ for N in (32, )
     unit_cube_esnice_ssit(N, 100)
     # unit_cube_esnice_ssit(N, 500)
 end
+
 end # module 
 nothing
