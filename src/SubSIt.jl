@@ -171,7 +171,7 @@ See also the documentation for Arpack `eigs`.
 * `lamberr` = eigenvalue errors, defined as normalized  differences  of
     successive  estimates of the eigenvalues.
 """
-function ssit(K, M; nev = 6, ncv=0, tol = 2.0e-3, maxiter = 300, verbose=false, which=:SM, X = fill(eltype(K), 0, 0), check=0, ritzvec=true, sigma=0.0) 
+function ssit(K, M; nev = 6, ncv=0, tol = 1.0e-3, maxiter = 300, verbose=false, which=:SM, X = fill(eltype(K), 0, 0), check=0, ritzvec=true, sigma=0.0) 
     which != :SM && error("Wrong type of eigenvalue requested; only :SM accepted")
     nev < 1 && error("Wrong number of eigenvalues: needs to be > 1") 
 
