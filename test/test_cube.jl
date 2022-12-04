@@ -73,6 +73,14 @@ function unit_cube_esnice_ssit(N, neigvs = 20)
     # println("Eigenvalues: $fs [Hz]")
     @test norm(fs - reffs) / norm(reffs) < tol
 
+    @info "N=$(N), neigvs=$(neigvs), ssit, ncv fixed"
+    @time d,v,nconv = ssit(K+OmegaShift*M, M; nev=neigvs, ncv=2*neigvs, verbose=true)
+    d = d .- OmegaShift;
+    fs = real(sqrt.(complex(d)))/(2*pi)
+    # println("Eigenvalues: $fs [Hz]")
+    @test norm(fs - reffs) / norm(reffs) < tol
+
+    
     # mode = 17
     # scattersysvec!(u, v[:,mode])
     # File =  "unit_cube_esnice.vtk"

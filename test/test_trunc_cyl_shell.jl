@@ -52,13 +52,6 @@ function trunc_cyl_shell()
     K =stiffness(femm, geom, u)
     femm = FEMMDeforLinear(MR, IntegDomain(fes, GaussRule(3,3)), material)
     M =mass(femm, geom, u)
-
-
-    # eigs returns the nev requested eigenvalues in d, the corresponding Ritz vectors
-    # v (only if ritzvec=true), the number of converged eigenvalues nconv, the number
-    # of iterations niter and the number of matrix vector multiplications nmult, as
-    # well as the final residual vector resid.
-
     
     tim = @elapsed begin
         evals, evecs, convinfo = ssit(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs)
@@ -70,7 +63,6 @@ function trunc_cyl_shell()
     @info "SubSIt: Time $tim [sec]"
     reffs = fs
 
-
     tim = @elapsed begin
         evals, evecs, convinfo = eigs(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, which=:SM, explicittransform=:none)
     end
@@ -79,8 +71,17 @@ function trunc_cyl_shell()
     fs = real(sqrt.(complex(evals)))/(2*pi)
     @info "Frequencies: $(round.(fs[7:15], digits=4))"
     @info "Arpack: Time $tim [sec]"
-
     @test norm(reffs - fs) / norm(reffs) < 1.0e-3
+
+
+    tim = @elapsed begin
+        evals, evecs, convinfo = ssit(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, ncv=2*neigvs)
+    end
+    @show convinfo
+    evals[:] = evals .- OmegaShift;
+    fs = real(sqrt.(complex(evals)))/(2*pi)
+    @info "Frequencies: $(round.(fs[7:15], digits=4))"
+    @info "SubSIt: Time $tim [sec]"
 
     true
 
