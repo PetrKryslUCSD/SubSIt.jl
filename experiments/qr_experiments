@@ -1,0 +1,1275 @@
+                                                                                      
+pkonl@Hedwig MINGW64 ~/Documents/00WIP/SubSIt.jl (main)                               
+$ cd experiments/                                                                     
+                                                                                      
+pkonl@Hedwig MINGW64 ~/Documents/00WIP/SubSIt.jl/experiments (main)                   
+$ julia                                                                               
+   Resolving package versions...                                                      
+    Updating `C:\Users\pkonl\SublimeJulia_1.8\assets\.julia-1.8.3-depot\environments\v​‌​
+1.8\Project.toml`                                                                     
+  [295af30f] + Revise v3.4.0                                                          
+    Updating `C:\Users\pkonl\SublimeJulia_1.8\assets\.julia-1.8.3-depot\environments\v​‌​
+1.8\Manifest.toml`                                                                    
+  [da1fd8a2] + CodeTracking v1.1.1                                                    
+  [aa1ae85d] + JuliaInterpreter v0.9.16                                               
+  [6f1432cf] + LoweredCodeUtils v2.2.2                                                
+  [bac558e1] + OrderedCollections v1.4.1                                              
+  [ae029012] + Requires v1.3.0                                                        
+  [295af30f] + Revise v3.4.0                                                          
+  [0dad84c5] + ArgTools v1.1.1                                                        
+  [56f22d72] + Artifacts                                                              
+  [2a0f44e3] + Base64                                                                 
+  [ade2ca70] + Dates                                                                  
+  [8ba89e20] + Distributed                                                            
+  [f43a241f] + Downloads v1.6.0                                                       
+  [7b1f6079] + FileWatching                                                           
+  [b77e0a4c] + InteractiveUtils                                                       
+  [b27032c2] + LibCURL v0.6.3                                                         
+  [76f85450] + LibGit2                                                                
+  [8f399da3] + Libdl                                                                  
+  [56ddb016] + Logging                                                                
+  [d6f4376e] + Markdown                                                               
+  [ca575930] + NetworkOptions v1.2.0                                                  
+  [44cfe95a] + Pkg v1.8.0                                                             
+  [de0858da] + Printf                                                                 
+  [3fa0cd96] + REPL                                                                   
+  [9a3f8284] + Random                                                                 
+  [ea8e919c] + SHA v0.7.0                                                             
+  [9e88b42a] + Serialization                                                          
+  [6462fe0b] + Sockets                                                                
+  [fa267f1f] + TOML v1.0.0                                                            
+  [a4e569a6] + Tar v1.10.1                                                            
+  [cf7118a7] + UUIDs                                                                  
+  [4ec0a83e] + Unicode                                                                
+  [deac9b47] + LibCURL_jll v7.84.0+0                                                  
+  [29816b5a] + LibSSH2_jll v1.10.2+0                                                  
+  [c8ffd9c3] + MbedTLS_jll v2.28.0+0                                                  
+  [14a3606d] + MozillaCACerts_jll v2022.2.1                                           
+  [83775a58] + Zlib_jll v1.2.12+3                                                     
+  [8e850ede] + nghttp2_jll v1.48.0+0                                                  
+  [3f19e933] + p7zip_jll v17.4.0+0                                                    
+               _                                                                      
+   _       _ _(_)_     |  Documentation: https://docs.julialang.org                   
+  (_)     | (_) (_)    |                                                              
+   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.                       
+  | | | | | | |/ _` |  |                                                              
+  | | |_| | | | (_| |  |  Version 1.8.3 (2022-11-14)                                  
+ _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release                     
+|__/                   |                                                              
+                                                                                      
+julia> 1                                                                              
+1                                                                                     
+                                                                                      
+julia> using Pkg; Pkg.activate("."); Pkg.instantiate();                               
+  Activating new project at `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments`    
+  No Changes to `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Project.toml`   
+  No Changes to `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Manifest.toml`  
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+ERROR: LoadError: ArgumentError: Package FinEtools not found in current path.         
+- Run `import Pkg; Pkg.add("FinEtools")` to install the FinEtools package.            
+Stacktrace:                                                                           
+ [1] macro expansion                                                                  
+   @ .\loading.jl:1163 [inlined]                                                      
+ [2] macro expansion                                                                  
+   @ .\lock.jl:223 [inlined]                                                          
+ [3] require(into::Module, mod::Symbol)                                               
+   @ Base .\loading.jl:1144                                                           
+ [4] include(fname::String)                                                           
+   @ Base.MainInclude .\client.jl:476                                                 
+ [5] top-level scope                                                                  
+   @ REPL[3]:1                                                                        
+in expression starting at C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\cube_ex​‌​
+periments.jl:1                                                                        
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+WARNING: replacing module unit_cube_tet_examples.                                     
+ERROR: LoadError: ArgumentError: Package FinEtools not found in current path.         
+- Run `import Pkg; Pkg.add("FinEtools")` to install the FinEtools package.            
+Stacktrace:                                                                           
+ [1] macro expansion                                                                  
+   @ .\loading.jl:1163 [inlined]                                                      
+ [2] macro expansion                                                                  
+   @ .\lock.jl:223 [inlined]                                                          
+ [3] require(into::Module, mod::Symbol)                                               
+   @ Base .\loading.jl:1144                                                           
+ [4] include(fname::String)                                                           
+   @ Base.MainInclude .\client.jl:476                                                 
+ [5] top-level scope                                                                  
+   @ REPL[3]:1                                                                        
+in expression starting at C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\cube_ex​‌​
+periments.jl:1                                                                        
+                                                                                      
+julia> import Pkg; Pkg.add("FinEtools")                                               
+   Resolving package versions...                                                      
+    Updating `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Project.toml`      
+  [91bb5406] + FinEtools v5.4.9                                                       
+    Updating `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Manifest.toml`     
+  [79e6a3ab] + Adapt v3.4.0                                                           
+  [4fba245c] + ArrayInterface v6.0.24                                                 
+  [30b0a656] + ArrayInterfaceCore v0.1.26                                             
+  [015c0d05] + ArrayInterfaceOffsetArrays v0.1.7                                      
+  [b0d46f97] + ArrayInterfaceStaticArrays v0.1.5                                      
+  [dd5226c6] + ArrayInterfaceStaticArraysCore v0.1.3                                  
+  [62783981] + BitTwiddlingConvenienceFunctions v0.1.5                                
+  [a74b3585] + Blosc v0.7.3                                                           
+  [2a0fbf3d] + CPUSummary v0.1.30                                                     
+  [d360d2e6] + ChainRulesCore v1.15.6                                                 
+  [9e997f8a] + ChangesOfVariables v0.1.4                                              
+  [fb6a15b2] + CloseOpenIntervals v0.1.11                                             
+  [da1fd8a2] + CodeTracking v1.1.1                                                    
+  [944b1d66] + CodecZlib v0.7.0                                                       
+  [bbf7d656] + CommonSubexpressions v0.3.0                                            
+⌅ [34da2185] + Compat v3.46.0                                                         
+  [adafc99b] + CpuId v0.3.1                                                           
+  [9a962f9c] + DataAPI v1.13.0                                                        
+  [aa547a04] + DataDrop v0.1.2                                                        
+  [864edb3b] + DataStructures v0.18.13                                                
+  [163ba53b] + DiffResults v1.1.0                                                     
+  [b552c78f] + DiffRules v1.12.2                                                      
+  [ffbed154] + DocStringExtensions v0.9.2                                             
+  [1a297f60] + FillArrays v0.13.5                                                     
+  [91bb5406] + FinEtools v5.4.9                                                       
+  [f6369f11] + ForwardDiff v0.10.33                                                   
+⌅ [f67ccb44] + HDF5 v0.15.7                                                           
+  [3e5b6fbb] + HostCPUFeatures v0.1.13                                                
+  [615f187c] + IfElse v0.1.1                                                          
+  [3587e190] + InverseFunctions v0.1.8                                                
+  [92d709cd] + IrrationalConstants v0.1.1                                             
+  [692b3bcd] + JLLWrappers v1.4.1                                                     
+  [682c06a0] + JSON v0.21.3                                                           
+  [aa1ae85d] + JuliaInterpreter v0.9.16                                               
+  [10f19ff3] + LayoutPointers v0.1.12                                                 
+  [9c8b4983] + LightXML v0.9.0                                                        
+  [2ab3a3ac] + LogExpFunctions v0.3.19                                                
+  [bdcacae8] + LoopVectorization v0.12.141                                            
+  [6f1432cf] + LoweredCodeUtils v2.2.2                                                
+  [1914dd2f] + MacroTools v0.5.10                                                     
+  [d125e4d3] + ManualMemory v0.1.8                                                    
+  [e1d29d7a] + Missings v1.0.2                                                        
+  [77ba4419] + NaNMath v1.0.1                                                         
+  [6fe1bfb0] + OffsetArrays v1.12.8                                                   
+  [bac558e1] + OrderedCollections v1.4.1                                              
+  [69de0a69] + Parsers v2.5.1                                                         
+  [1d0040c9] + PolyesterWeave v0.1.11                                                 
+  [21216c6a] + Preferences v1.3.0                                                     
+  [ae029012] + Requires v1.3.0                                                        
+  [295af30f] + Revise v3.4.0                                                          
+  [3cdde19b] + SIMDDualNumbers v0.1.1                                                 
+  [94e857df] + SIMDTypes v0.1.0                                                       
+  [476501e8] + SLEEFPirates v0.6.37                                                   
+  [66db9d55] + SnoopPrecompile v1.0.1                                                 
+  [a2af1166] + SortingAlgorithms v1.1.0                                               
+  [276daf66] + SpecialFunctions v2.1.7                                                
+  [aedffcd0] + Static v0.8.2                                                          
+  [90137ffa] + StaticArrays v1.5.11                                                   
+  [1e83bf80] + StaticArraysCore v1.4.0                                                
+  [82ae8749] + StatsAPI v1.5.0                                                        
+  [2913bbd2] + StatsBase v0.33.21                                                     
+  [286e6d88] + SymRCM v0.2.1                                                          
+  [8290d209] + ThreadingUtilities v0.5.0                                              
+  [3bb67fe8] + TranscodingStreams v0.9.9                                              
+  [3a884ed6] + UnPack v1.0.2                                                          
+  [3d5dd08c] + VectorizationBase v0.21.56                                             
+  [64499a7a] + WriteVTK v1.16.0                                                       
+  [0b7ba130] + Blosc_jll v1.21.1+0                                                    
+  [0234f1f7] + HDF5_jll v1.12.2+2                                                     
+  [94ce4f54] + Libiconv_jll v1.16.1+1                                                 
+  [458c3c95] + OpenSSL_jll v1.1.19+0                                                  
+  [efe28fd5] + OpenSpecFun_jll v0.5.5+0                                               
+  [02c8fc9c] + XML2_jll v2.9.14+0                                                     
+  [3161d3a3] + Zstd_jll v1.5.2+0                                                      
+  [0dad84c5] + ArgTools v1.1.1                                                        
+  [56f22d72] + Artifacts                                                              
+  [2a0f44e3] + Base64                                                                 
+  [ade2ca70] + Dates                                                                  
+  [8bb1440f] + DelimitedFiles                                                         
+  [8ba89e20] + Distributed                                                            
+  [f43a241f] + Downloads v1.6.0                                                       
+  [7b1f6079] + FileWatching                                                           
+  [b77e0a4c] + InteractiveUtils                                                       
+  [b27032c2] + LibCURL v0.6.3                                                         
+  [76f85450] + LibGit2                                                                
+  [8f399da3] + Libdl                                                                  
+  [37e2e46d] + LinearAlgebra                                                          
+  [56ddb016] + Logging                                                                
+  [d6f4376e] + Markdown                                                               
+  [a63ad114] + Mmap                                                                   
+  [ca575930] + NetworkOptions v1.2.0                                                  
+  [44cfe95a] + Pkg v1.8.0                                                             
+  [de0858da] + Printf                                                                 
+  [3fa0cd96] + REPL                                                                   
+  [9a3f8284] + Random                                                                 
+  [ea8e919c] + SHA v0.7.0                                                             
+  [9e88b42a] + Serialization                                                          
+  [1a1011a3] + SharedArrays                                                           
+  [6462fe0b] + Sockets                                                                
+  [2f01184e] + SparseArrays                                                           
+  [10745b16] + Statistics                                                             
+  [4607b0f0] + SuiteSparse                                                            
+  [fa267f1f] + TOML v1.0.0                                                            
+  [a4e569a6] + Tar v1.10.1                                                            
+  [8dfed614] + Test                                                                   
+  [cf7118a7] + UUIDs                                                                  
+  [4ec0a83e] + Unicode                                                                
+  [e66e0078] + CompilerSupportLibraries_jll v0.5.2+0                                  
+  [deac9b47] + LibCURL_jll v7.84.0+0                                                  
+  [29816b5a] + LibSSH2_jll v1.10.2+0                                                  
+  [c8ffd9c3] + MbedTLS_jll v2.28.0+0                                                  
+  [14a3606d] + MozillaCACerts_jll v2022.2.1                                           
+  [4536629a] + OpenBLAS_jll v0.3.20+0                                                 
+  [05823500] + OpenLibm_jll v0.8.1+0                                                  
+  [83775a58] + Zlib_jll v1.2.12+3                                                     
+  [8e850b90] + libblastrampoline_jll v5.1.1+0                                         
+  [8e850ede] + nghttp2_jll v1.48.0+0                                                  
+  [3f19e933] + p7zip_jll v17.4.0+0                                                    
+        Info Packages marked with ⌅ have new versions available but compatibility cons​‌​
+traints restrict them from upgrading. To see why use `status --outdated -m`           
+                                                                                      
+(experiments) pkg> add FinEtoolsDeforLinear LinearAlgebra DataDrop                    
+   Resolving package versions...                                                      
+   Installed Arpack ─ v0.5.4                                                          
+    Updating `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Project.toml`      
+  [aa547a04] + DataDrop v0.1.2                                                        
+  [e9187c00] + FinEtoolsDeforLinear v1.4.6                                            
+  [37e2e46d] + LinearAlgebra                                                          
+    Updating `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Manifest.toml`     
+  [7d9fca2a] + Arpack v0.5.4                                                          
+  [e9187c00] + FinEtoolsDeforLinear v1.4.6                                            
+⌅ [68821587] + Arpack_jll v3.5.1+1                                                    
+        Info Packages marked with ⌅ have new versions available but compatibility cons​‌​
+traints restrict them from upgrading. To see why use `status --outdated -m`           
+Precompiling project...                                                               
+  2 dependencies successfully precompiled in 7 seconds. 83 already precompiled.       
+                                                                                      
+(experiments) pkg> add Arpack@v0.5.3                                                  
+   Resolving package versions...                                                      
+    Updating `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Project.toml`      
+⌃ [7d9fca2a] + Arpack v0.5.3                                                          
+    Updating `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Manifest.toml`     
+⌃ [7d9fca2a] ↓ Arpack v0.5.4 ⇒ v0.5.3                                                 
+        Info Packages marked with ⌃ have new versions available and may be upgradable.​‌​
+                                                                                      
+(experiments) pkg> status                                                             
+Status `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Project.toml`            
+⌃ [7d9fca2a] Arpack v0.5.3                                                            
+  [aa547a04] DataDrop v0.1.2                                                          
+  [91bb5406] FinEtools v5.4.9                                                         
+  [e9187c00] FinEtoolsDeforLinear v1.4.6                                              
+  [37e2e46d] LinearAlgebra                                                            
+Info Packages marked with ⌃ have new versions available and may be upgradable.        
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+WARNING: replacing module unit_cube_tet_examples.                                     
+ERROR: LoadError: ArgumentError: Package SubSIt not found in current path.            
+- Run `import Pkg; Pkg.add("SubSIt")` to install the SubSIt package.                  
+Stacktrace:                                                                           
+ [1] macro expansion                                                                  
+   @ .\loading.jl:1163 [inlined]                                                      
+ [2] macro expansion                                                                  
+   @ .\lock.jl:223 [inlined]                                                          
+ [3] require(into::Module, mod::Symbol)                                               
+   @ Base .\loading.jl:1144                                                           
+ [4] include(fname::String)                                                           
+   @ Base.MainInclude .\client.jl:476                                                 
+ [5] top-level scope                                                                  
+   @ REPL[8]:1                                                                        
+in expression starting at C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\cube_ex​‌​
+periments.jl:1                                                                        
+                                                                                      
+(experiments) pkg> dev ..                                                             
+   Resolving package versions...                                                      
+    Updating `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Project.toml`      
+  [f42569b2] + SubSIt v1.1.0 `..`                                                     
+    Updating `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Manifest.toml`     
+  [33e6dc65] + MKL v0.6.0                                                             
+  [f42569b2] + SubSIt v1.1.0 `..`                                                     
+  [1d5cc7b8] + IntelOpenMP_jll v2018.0.3+2                                            
+  [856f044c] + MKL_jll v2022.2.0+0                                                    
+  [4af54fe1] + LazyArtifacts                                                          
+                                                                                      
+(experiments) pkg> add MKL                                                            
+   Resolving package versions...                                                      
+    Updating `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Project.toml`      
+  [33e6dc65] + MKL v0.6.0                                                             
+  No Changes to `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Manifest.toml`  
+Precompiling project...                                                               
+  1 dependency successfully precompiled in 1 seconds. 88 already precompiled.         
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+WARNING: replacing module unit_cube_tet_examples.                                     
+ERROR: LoadError: UndefVarError: @test not defined                                    
+Stacktrace:                                                                           
+ [1] top-level scope                                                                  
+   @ :0                                                                               
+ [2] include(fname::String)                                                           
+   @ Base.MainInclude .\client.jl:476                                                 
+ [3] top-level scope                                                                  
+   @ REPL[11]:1                                                                       
+in expression starting at C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\cube_ex​‌​
+periments.jl:74                                                                       
+in expression starting at C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\cube_ex​‌​
+periments.jl:1                                                                        
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+WARNING: replacing module unit_cube_tet_examples.                                     
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=60, eigs                                                         
+  8.819048 seconds (7.97 M allocations: 1.052 GiB, 3.42% gc time, 38.98% compilation t​‌​
+ime)                                                                                  
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 16                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 80                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 24                                                               
+Iteration 2: nconv = 29                                                               
+Iteration 3: nconv = 35                                                               
+Iteration 4: nconv = 38                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 45                                                               
+Iteration 2: nconv = 49                                                               
+Iteration 3: nconv = 53                                                               
+Iteration 4: nconv = 62                                                               
+  9.781643 seconds (6.60 M allocations: 1.370 GiB, 3.99% gc time, 51.25% compilation t​‌​
+ime)                                                                                  
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Number of requested eigenvalues: 40, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 50                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 72                                                               
+  3.612346 seconds (55.41 k allocations: 966.440 MiB, 0.56% gc time, 1.01% compilation​‌​
+ time)                                                                                
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=60, eigs                                                         
+  5.252503 seconds (11.94 k allocations: 660.077 MiB, 0.28% gc time)                  
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 14                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 80                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 25                                                               
+Iteration 2: nconv = 28                                                               
+Iteration 3: nconv = 34                                                               
+Iteration 4: nconv = 36                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 47                                                               
+Iteration 2: nconv = 50                                                               
+Iteration 3: nconv = 52                                                               
+Iteration 4: nconv = 59                                                               
+Iteration 5: nconv = 68                                                               
+  4.954889 seconds (1.58 k allocations: 1.115 GiB, 0.65% gc time)                     
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 23                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 49                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 72                                                               
+  3.576465 seconds (680 allocations: 963.540 MiB, 0.45% gc time)                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+                                                                                      
+(experiments) pkg> add  ArnoldiMethod, LinearAlgebra, LinearMaps                      
+   Resolving package versions...                                                      
+   Installed LinearMaps ─ v3.8.0                                                      
+    Updating `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Project.toml`      
+  [ec485272] + ArnoldiMethod v0.2.0                                                   
+  [7a12625a] + LinearMaps v3.8.0                                                      
+    Updating `C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\Manifest.toml`     
+  [ec485272] + ArnoldiMethod v0.2.0                                                   
+  [7a12625a] + LinearMaps v3.8.0                                                      
+Precompiling project...                                                               
+  1 dependency successfully precompiled in 2 seconds. 90 already precompiled.         
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+WARNING: replacing module unit_cube_tet_examples.                                     
+ERROR: LoadError: syntax: "struct" expression not at top level                        
+Stacktrace:                                                                           
+ [1] top-level scope                                                                  
+   @ C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\cube_experiments.jl:23      
+ [2] include(fname::String)                                                           
+   @ Base.MainInclude .\client.jl:476                                                 
+ [3] top-level scope                                                                  
+   @ REPL[13]:1                                                                       
+in expression starting at C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\cube_ex​‌​
+periments.jl:1                                                                        
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+WARNING: replacing module unit_cube_tet_examples.                                     
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=60, eigs                                                         
+  4.916310 seconds (11.96 k allocations: 660.303 MiB, 0.35% gc time)                  
+Eigenvalues: [0.00000e+00, 0.00000e+00, 1.35391e-07, 1.96941e-07, 2.39589e-07, 3.01726​‌​
+e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.​‌​
+57552e-01, 3.57918e-01, 3.99573e-01, 4.05492e-01, 4.05636e-01, 4.52967e-01, 4.53473e-0​‌​
+1, 4.54334e-01, 4.54362e-01, 4.55020e-01, 4.55884e-01, 4.90998e-01, 4.95228e-01, 4.955​‌​
+09e-01, 5.07232e-01, 5.15129e-01, 5.20341e-01, 5.20725e-01, 5.45710e-01, 5.45957e-01, 
+5.68722e-01, 5.73539e-01, 5.73890e-01, 6.04877e-01, 6.05079e-01, 6.05802e-01, 6.43355e​‌​
+-01, 6.50614e-01, 6.51026e-01, 6.52749e-01, 6.59238e-01, 6.60112e-01, 6.61011e-01, 6.6​‌​
+5128e-01, 6.65898e-01, 6.73164e-01, 6.83716e-01, 6.89098e-01, 7.32921e-01, 7.34155e-01​‌​
+, 7.35239e-01, 7.37099e-01, 7.40341e-01, 7.53350e-01, 7.62701e-01, 7.66530e-01, 7.6686​‌​
+8e-01, 7.70601e-01] [Hz]                                                              
+ERROR: LoadError: MethodError: no method matching ldiv!(::SuiteSparse.CHOLMOD.Factor{F​‌​
+loat64}, ::SubArray{Float64, 1, Matrix{Float64}, Tuple{Base.Slice{Base.OneTo{Int64}}, 
+Int64}, true})                                                                        
+Closest candidates are:                                                               
+  ldiv!(::Any, ::ChainRulesCore.AbstractThunk) at C:\Users\pkonl\SublimeJulia_1.8\asse​‌​
+ts\.julia-1.8.3-depot\packages\ChainRulesCore\C73ay\src\tangent_types\thunks.jl:95    
+  ldiv!(::LinearAlgebra.UpperTriangular{T, <:StridedMatrix{T} where T}, ::StridedVecOr​‌​
+Mat{T}) where T<:Union{Float32, Float64, ComplexF32, ComplexF64} at C:\Users\pkonl\Sub​‌​
+limeJulia_1.8\assets\julia-1.8.3\share\julia\stdlib\v1.8\LinearAlgebra\src\triangular.​‌​
+jl:729                                                                                
+  ldiv!(::LinearAlgebra.UpperTriangular{<:Any, <:LinearAlgebra.Transpose{T, <:StridedM​‌​
+atrix{T} where T}}, ::StridedVecOrMat{T}) where T<:Union{Float32, Float64, ComplexF32,​‌​
+ ComplexF64} at C:\Users\pkonl\SublimeJulia_1.8\assets\julia-1.8.3\share\julia\stdlib\​‌​
+v1.8\LinearAlgebra\src\triangular.jl:788                                              
+  ...                                                                                 
+Stacktrace:                                                                           
+  [1] ldiv!(Y::SubArray{Float64, 1, Matrix{Float64}, Tuple{Base.Slice{Base.OneTo{Int64​‌​
+}}, Int64}, true}, A::SuiteSparse.CHOLMOD.Factor{Float64}, B::Vector{Float64})        
+    @ LinearAlgebra C:\Users\pkonl\SublimeJulia_1.8\assets\julia-1.8.3\share\julia\std​‌​
+lib\v1.8\LinearAlgebra\src\factorization.jl:126                                       
+  [2] (::Main.unit_cube_tet_examples.ShiftAndInvert{SuiteSparse.CHOLMOD.Factor{Float64​‌​
+}, SparseArrays.SparseMatrixCSC{Float64, Int64}, Vector{Float64}})(y::SubArray{Float64​‌​
+, 1, Matrix{Float64}, Tuple{Base.Slice{Base.OneTo{Int64}}, Int64}, true}, x::SubArray{​‌​
+Float64, 1, Matrix{Float64}, Tuple{Base.Slice{Base.OneTo{Int64}}, Int64}, true})      
+    @ Main.unit_cube_tet_examples C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments​‌​
+\cube_experiments.jl:32                                                               
+  [3] _unsafe_mul!(y::SubArray{Float64, 1, Matrix{Float64}, Tuple{Base.Slice{Base.OneT​‌​
+o{Int64}}, Int64}, true}, A::LinearMaps.FunctionMap{Float64, Main.unit_cube_tet_exampl​‌​
+es.ShiftAndInvert{SuiteSparse.CHOLMOD.Factor{Float64}, SparseArrays.SparseMatrixCSC{Fl​‌​
+oat64, Int64}, Vector{Float64}}, Nothing}, x::SubArray{Float64, 1, Matrix{Float64}, Tu​‌​
+ple{Base.Slice{Base.OneTo{Int64}}, Int64}, true})                                     
+    @ LinearMaps C:\Users\pkonl\SublimeJulia_1.8\assets\.julia-1.8.3-depot\packages\Li​‌​
+nearMaps\BT89E\src\functionmap.jl:114                                                 
+  [4] mul!(y::SubArray{Float64, 1, Matrix{Float64}, Tuple{Base.Slice{Base.OneTo{Int64}​‌​
+}, Int64}, true}, A::LinearMaps.FunctionMap{Float64, Main.unit_cube_tet_examples.Shift​‌​
+AndInvert{SuiteSparse.CHOLMOD.Factor{Float64}, SparseArrays.SparseMatrixCSC{Float64, I​‌​
+nt64}, Vector{Float64}}, Nothing}, x::SubArray{Float64, 1, Matrix{Float64}, Tuple{Base​‌​
+.Slice{Base.OneTo{Int64}}, Int64}, true})                                             
+    @ LinearMaps C:\Users\pkonl\SublimeJulia_1.8\assets\.julia-1.8.3-depot\packages\Li​‌​
+nearMaps\BT89E\src\LinearMaps.jl:167                                                  
+  [5] iterate_arnoldi!                                                                
+    @ C:\Users\pkonl\SublimeJulia_1.8\assets\.julia-1.8.3-depot\packages\ArnoldiMethod​‌​
+\JdEiw\src\expansion.jl:117 [inlined]                                                 
+  [6] _partialschur(A::LinearMaps.FunctionMap{Float64, Main.unit_cube_tet_examples.Shi​‌​
+ftAndInvert{SuiteSparse.CHOLMOD.Factor{Float64}, SparseArrays.SparseMatrixCSC{Float64,​‌​
+ Int64}, Vector{Float64}}, Nothing}, #unused#::Type{Float64}, mindim::Int64, maxdim::I​‌​
+nt64, nev::Int64, tol::Float64, restarts::Int64, which::ArnoldiMethod.LM)             
+    @ ArnoldiMethod C:\Users\pkonl\SublimeJulia_1.8\assets\.julia-1.8.3-depot\packages​‌​
+\ArnoldiMethod\JdEiw\src\run.jl:185                                                   
+  [7] partialschur(A::LinearMaps.FunctionMap{Float64, Main.unit_cube_tet_examples.Shif​‌​
+tAndInvert{SuiteSparse.CHOLMOD.Factor{Float64}, SparseArrays.SparseMatrixCSC{Float64, 
+Int64}, Vector{Float64}}, Nothing}; nev::Int64, which::ArnoldiMethod.LM, tol::Float64,​‌​
+ mindim::Int64, maxdim::Int64, restarts::Int64)                                       
+    @ ArnoldiMethod C:\Users\pkonl\SublimeJulia_1.8\assets\.julia-1.8.3-depot\packages​‌​
+\ArnoldiMethod\JdEiw\src\run.jl:106                                                   
+  [8] unit_cube_esnice_ssit(N::Int64, neigvs::Int64)                                  
+    @ Main.unit_cube_tet_examples C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments​‌​
+\cube_experiments.jl:79                                                               
+  [9] top-level scope                                                                 
+    @ C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\cube_experiments.jl:120    
+ [10] include(fname::String)                                                          
+    @ Base.MainInclude .\client.jl:476                                                
+ [11] top-level scope                                                                 
+    @ REPL[13]:1                                                                      
+in expression starting at C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\cube_ex​‌​
+periments.jl:1                                                                        
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+WARNING: replacing module unit_cube_tet_examples.                                     
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=60, eigs                                                         
+  4.947694 seconds (12.14 k allocations: 660.080 MiB, 0.37% gc time)                  
+Eigenvalues: [0.00000e+00, 0.00000e+00, 1.35391e-07, 1.96941e-07, 2.39589e-07, 3.01727​‌​
+e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.​‌​
+57552e-01, 3.57918e-01, 3.99573e-01, 4.05492e-01, 4.05636e-01, 4.52967e-01, 4.53473e-0​‌​
+1, 4.54334e-01, 4.54362e-01, 4.55020e-01, 4.55884e-01, 4.90998e-01, 4.95228e-01, 4.955​‌​
+09e-01, 5.07232e-01, 5.15129e-01, 5.20341e-01, 5.20725e-01, 5.45710e-01, 5.45957e-01, 
+5.68722e-01, 5.73539e-01, 5.73890e-01, 6.04877e-01, 6.05079e-01, 6.05802e-01, 6.43355e​‌​
+-01, 6.50614e-01, 6.51026e-01, 6.52749e-01, 6.59238e-01, 6.60112e-01, 6.61011e-01, 6.6​‌​
+5128e-01, 6.65898e-01, 6.73164e-01, 6.83716e-01, 6.89098e-01, 7.32921e-01, 7.34155e-01​‌​
+, 7.35239e-01, 7.37099e-01, 7.40341e-01, 7.53350e-01, 7.62701e-01, 7.66530e-01, 7.6686​‌​
+8e-01, 7.70601e-01] [Hz]                                                              
+Eigenvalues: [1.00000e-02, 1.00000e-02, 1.00000e-02, 1.00000e-02] [Hz]                
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 16                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 80                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 26                                                               
+Iteration 2: nconv = 30                                                               
+Iteration 3: nconv = 33                                                               
+Iteration 4: nconv = 37                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 45                                                               
+Iteration 2: nconv = 51                                                               
+Iteration 3: nconv = 52                                                               
+Iteration 4: nconv = 59                                                               
+Iteration 5: nconv = 69                                                               
+  5.372670 seconds (390.32 k allocations: 1.132 GiB, 6.68% gc time, 4.73% compilation 
+time: 97% of which was recompilation)                                                 
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 23                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 50                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 72                                                               
+  3.664588 seconds (676 allocations: 963.540 MiB, 0.37% gc time)                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=60, eigs                                                         
+  4.966924 seconds (11.96 k allocations: 660.303 MiB, 0.30% gc time)                  
+Eigenvalues: [0.00000e+00, 0.00000e+00, 1.35391e-07, 1.96941e-07, 2.39589e-07, 3.01727​‌​
+e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.​‌​
+57552e-01, 3.57918e-01, 3.99573e-01, 4.05492e-01, 4.05636e-01, 4.52967e-01, 4.53473e-0​‌​
+1, 4.54334e-01, 4.54362e-01, 4.55020e-01, 4.55884e-01, 4.90998e-01, 4.95228e-01, 4.955​‌​
+09e-01, 5.07232e-01, 5.15129e-01, 5.20341e-01, 5.20725e-01, 5.45710e-01, 5.45957e-01, 
+5.68722e-01, 5.73539e-01, 5.73890e-01, 6.04877e-01, 6.05079e-01, 6.05802e-01, 6.43355e​‌​
+-01, 6.50614e-01, 6.51026e-01, 6.52749e-01, 6.59238e-01, 6.60112e-01, 6.61011e-01, 6.6​‌​
+5128e-01, 6.65898e-01, 6.73164e-01, 6.83716e-01, 6.89098e-01, 7.32921e-01, 7.34155e-01​‌​
+, 7.35239e-01, 7.37099e-01, 7.40341e-01, 7.53350e-01, 7.62701e-01, 7.66530e-01, 7.6686​‌​
+8e-01, 7.70601e-01] [Hz]                                                              
+Eigenvalues: [1.00000e-02, 1.00000e-02, 1.00000e-02, 1.00000e-02] [Hz]                
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 16                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 80                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 22                                                               
+Iteration 2: nconv = 27                                                               
+Iteration 3: nconv = 33                                                               
+Iteration 4: nconv = 36                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 44                                                               
+Iteration 2: nconv = 49                                                               
+Iteration 3: nconv = 53                                                               
+Iteration 4: nconv = 60                                                               
+  4.376896 seconds (1.09 k allocations: 1.059 GiB, 0.48% gc time)                     
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 23                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 50                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 72                                                               
+  3.592155 seconds (668 allocations: 963.540 MiB, 0.28% gc time)                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+WARNING: replacing module unit_cube_tet_examples.                                     
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=60, eigs                                                         
+  4.992771 seconds (11.94 k allocations: 660.077 MiB, 0.14% gc time)                  
+Eigenvalues: [0.00000e+00, 0.00000e+00, 1.35391e-07, 1.96941e-07, 2.39589e-07, 3.01727​‌​
+e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.​‌​
+57552e-01, 3.57918e-01, 3.99573e-01, 4.05492e-01, 4.05636e-01, 4.52967e-01, 4.53473e-0​‌​
+1, 4.54334e-01, 4.54362e-01, 4.55020e-01, 4.55884e-01, 4.90998e-01, 4.95228e-01, 4.955​‌​
+09e-01, 5.07232e-01, 5.15129e-01, 5.20341e-01, 5.20725e-01, 5.45710e-01, 5.45957e-01, 
+5.68722e-01, 5.73539e-01, 5.73890e-01, 6.04877e-01, 6.05079e-01, 6.05802e-01, 6.43355e​‌​
+-01, 6.50614e-01, 6.51026e-01, 6.52749e-01, 6.59238e-01, 6.60112e-01, 6.61011e-01, 6.6​‌​
+5128e-01, 6.65898e-01, 6.73164e-01, 6.83716e-01, 6.89098e-01, 7.32921e-01, 7.34155e-01​‌​
+, 7.35239e-01, 7.37099e-01, 7.40341e-01, 7.53350e-01, 7.62701e-01, 7.66530e-01, 7.6686​‌​
+8e-01, 7.70601e-01] [Hz]                                                              
+ERROR: LoadError: UndefVarError: choleski not defined                                 
+Stacktrace:                                                                           
+ [1] construct_linear_map(A::SparseArrays.SparseMatrixCSC{Float64, Int64}, B::SparseAr​‌​
+rays.SparseMatrixCSC{Float64, Int64})                                                 
+   @ Main.unit_cube_tet_examples C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\​‌​
+cube_experiments.jl:36                                                                
+ [2] unit_cube_esnice_ssit(N::Int64, neigvs::Int64)                                   
+   @ Main.unit_cube_tet_examples C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\​‌​
+cube_experiments.jl:79                                                                
+ [3] top-level scope                                                                  
+   @ C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\cube_experiments.jl:121     
+ [4] include(fname::String)                                                           
+   @ Base.MainInclude .\client.jl:476                                                 
+ [5] top-level scope                                                                  
+   @ REPL[13]:1                                                                       
+in expression starting at C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\cube_ex​‌​
+periments.jl:1                                                                        
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+WARNING: replacing module unit_cube_tet_examples.                                     
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=60, eigs                                                         
+  4.921786 seconds (11.94 k allocations: 660.077 MiB, 0.25% gc time)                  
+Eigenvalues: [0.00000e+00, 0.00000e+00, 1.35391e-07, 1.96941e-07, 2.39589e-07, 3.01726​‌​
+e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.​‌​
+57552e-01, 3.57918e-01, 3.99573e-01, 4.05492e-01, 4.05636e-01, 4.52967e-01, 4.53473e-0​‌​
+1, 4.54334e-01, 4.54362e-01, 4.55020e-01, 4.55884e-01, 4.90998e-01, 4.95228e-01, 4.955​‌​
+09e-01, 5.07232e-01, 5.15129e-01, 5.20341e-01, 5.20725e-01, 5.45710e-01, 5.45957e-01, 
+5.68722e-01, 5.73539e-01, 5.73890e-01, 6.04877e-01, 6.05079e-01, 6.05802e-01, 6.43355e​‌​
+-01, 6.50614e-01, 6.51026e-01, 6.52749e-01, 6.59238e-01, 6.60112e-01, 6.61011e-01, 6.6​‌​
+5128e-01, 6.65898e-01, 6.73164e-01, 6.83716e-01, 6.89098e-01, 7.32921e-01, 7.34155e-01​‌​
+, 7.35239e-01, 7.37099e-01, 7.40341e-01, 7.53350e-01, 7.62701e-01, 7.66530e-01, 7.6686​‌​
+8e-01, 7.70601e-01] [Hz]                                                              
+ERROR: LoadError: MethodError: no method matching ldiv!(::SuiteSparse.CHOLMOD.Factor{F​‌​
+loat64}, ::SubArray{Float64, 1, Matrix{Float64}, Tuple{Base.Slice{Base.OneTo{Int64}}, 
+Int64}, true})                                                                        
+Closest candidates are:                                                               
+  ldiv!(::Any, ::ChainRulesCore.AbstractThunk) at C:\Users\pkonl\SublimeJulia_1.8\asse​‌​
+ts\.julia-1.8.3-depot\packages\ChainRulesCore\C73ay\src\tangent_types\thunks.jl:95    
+  ldiv!(::LinearAlgebra.UpperTriangular{T, <:StridedMatrix{T} where T}, ::StridedVecOr​‌​
+Mat{T}) where T<:Union{Float32, Float64, ComplexF32, ComplexF64} at C:\Users\pkonl\Sub​‌​
+limeJulia_1.8\assets\julia-1.8.3\share\julia\stdlib\v1.8\LinearAlgebra\src\triangular.​‌​
+jl:729                                                                                
+  ldiv!(::LinearAlgebra.UpperTriangular{<:Any, <:LinearAlgebra.Transpose{T, <:StridedM​‌​
+atrix{T} where T}}, ::StridedVecOrMat{T}) where T<:Union{Float32, Float64, ComplexF32,​‌​
+ ComplexF64} at C:\Users\pkonl\SublimeJulia_1.8\assets\julia-1.8.3\share\julia\stdlib\​‌​
+v1.8\LinearAlgebra\src\triangular.jl:788                                              
+  ...                                                                                 
+Stacktrace:                                                                           
+  [1] ldiv!(Y::SubArray{Float64, 1, Matrix{Float64}, Tuple{Base.Slice{Base.OneTo{Int64​‌​
+}}, Int64}, true}, A::SuiteSparse.CHOLMOD.Factor{Float64}, B::Vector{Float64})        
+    @ LinearAlgebra C:\Users\pkonl\SublimeJulia_1.8\assets\julia-1.8.3\share\julia\std​‌​
+lib\v1.8\LinearAlgebra\src\factorization.jl:126                                       
+  [2] (::Main.unit_cube_tet_examples.ShiftAndInvert{SuiteSparse.CHOLMOD.Factor{Float64​‌​
+}, SparseArrays.SparseMatrixCSC{Float64, Int64}, Vector{Float64}})(y::SubArray{Float64​‌​
+, 1, Matrix{Float64}, Tuple{Base.Slice{Base.OneTo{Int64}}, Int64}, true}, x::SubArray{​‌​
+Float64, 1, Matrix{Float64}, Tuple{Base.Slice{Base.OneTo{Int64}}, Int64}, true})      
+    @ Main.unit_cube_tet_examples C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments​‌​
+\cube_experiments.jl:32                                                               
+  [3] _unsafe_mul!(y::SubArray{Float64, 1, Matrix{Float64}, Tuple{Base.Slice{Base.OneT​‌​
+o{Int64}}, Int64}, true}, A::LinearMaps.FunctionMap{Float64, Main.unit_cube_tet_exampl​‌​
+es.ShiftAndInvert{SuiteSparse.CHOLMOD.Factor{Float64}, SparseArrays.SparseMatrixCSC{Fl​‌​
+oat64, Int64}, Vector{Float64}}, Nothing}, x::SubArray{Float64, 1, Matrix{Float64}, Tu​‌​
+ple{Base.Slice{Base.OneTo{Int64}}, Int64}, true})                                     
+    @ LinearMaps C:\Users\pkonl\SublimeJulia_1.8\assets\.julia-1.8.3-depot\packages\Li​‌​
+nearMaps\BT89E\src\functionmap.jl:114                                                 
+  [4] mul!(y::SubArray{Float64, 1, Matrix{Float64}, Tuple{Base.Slice{Base.OneTo{Int64}​‌​
+}, Int64}, true}, A::LinearMaps.FunctionMap{Float64, Main.unit_cube_tet_examples.Shift​‌​
+AndInvert{SuiteSparse.CHOLMOD.Factor{Float64}, SparseArrays.SparseMatrixCSC{Float64, I​‌​
+nt64}, Vector{Float64}}, Nothing}, x::SubArray{Float64, 1, Matrix{Float64}, Tuple{Base​‌​
+.Slice{Base.OneTo{Int64}}, Int64}, true})                                             
+    @ LinearMaps C:\Users\pkonl\SublimeJulia_1.8\assets\.julia-1.8.3-depot\packages\Li​‌​
+nearMaps\BT89E\src\LinearMaps.jl:167                                                  
+  [5] iterate_arnoldi!                                                                
+    @ C:\Users\pkonl\SublimeJulia_1.8\assets\.julia-1.8.3-depot\packages\ArnoldiMethod​‌​
+\JdEiw\src\expansion.jl:117 [inlined]                                                 
+  [6] _partialschur(A::LinearMaps.FunctionMap{Float64, Main.unit_cube_tet_examples.Shi​‌​
+ftAndInvert{SuiteSparse.CHOLMOD.Factor{Float64}, SparseArrays.SparseMatrixCSC{Float64,​‌​
+ Int64}, Vector{Float64}}, Nothing}, #unused#::Type{Float64}, mindim::Int64, maxdim::I​‌​
+nt64, nev::Int64, tol::Float64, restarts::Int64, which::ArnoldiMethod.LM)             
+    @ ArnoldiMethod C:\Users\pkonl\SublimeJulia_1.8\assets\.julia-1.8.3-depot\packages​‌​
+\ArnoldiMethod\JdEiw\src\run.jl:185                                                   
+  [7] partialschur(A::LinearMaps.FunctionMap{Float64, Main.unit_cube_tet_examples.Shif​‌​
+tAndInvert{SuiteSparse.CHOLMOD.Factor{Float64}, SparseArrays.SparseMatrixCSC{Float64, 
+Int64}, Vector{Float64}}, Nothing}; nev::Int64, which::ArnoldiMethod.LM, tol::Float64,​‌​
+ mindim::Int64, maxdim::Int64, restarts::Int64)                                       
+    @ ArnoldiMethod C:\Users\pkonl\SublimeJulia_1.8\assets\.julia-1.8.3-depot\packages​‌​
+\ArnoldiMethod\JdEiw\src\run.jl:106                                                   
+  [8] unit_cube_esnice_ssit(N::Int64, neigvs::Int64)                                  
+    @ Main.unit_cube_tet_examples C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments​‌​
+\cube_experiments.jl:79                                                               
+  [9] top-level scope                                                                 
+    @ C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\cube_experiments.jl:121    
+ [10] include(fname::String)                                                          
+    @ Base.MainInclude .\client.jl:476                                                
+ [11] top-level scope                                                                 
+    @ REPL[13]:1                                                                      
+in expression starting at C:\Users\pkonl\Documents\00WIP\SubSIt.jl\experiments\cube_ex​‌​
+periments.jl:1                                                                        
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+WARNING: replacing module unit_cube_tet_examples.                                     
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=60, eigs                                                         
+  4.989856 seconds (11.94 k allocations: 660.077 MiB, 0.54% gc time)                  
+Eigenvalues: [0.00000e+00, 0.00000e+00, 1.35391e-07, 1.96941e-07, 2.39590e-07, 3.01726​‌​
+e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.​‌​
+57552e-01, 3.57918e-01, 3.99573e-01, 4.05492e-01, 4.05636e-01, 4.52967e-01, 4.53473e-0​‌​
+1, 4.54334e-01, 4.54362e-01, 4.55020e-01, 4.55884e-01, 4.90998e-01, 4.95228e-01, 4.955​‌​
+09e-01, 5.07232e-01, 5.15129e-01, 5.20341e-01, 5.20725e-01, 5.45710e-01, 5.45957e-01, 
+5.68722e-01, 5.73539e-01, 5.73890e-01, 6.04877e-01, 6.05079e-01, 6.05802e-01, 6.43355e​‌​
+-01, 6.50614e-01, 6.51026e-01, 6.52749e-01, 6.59238e-01, 6.60112e-01, 6.61011e-01, 6.6​‌​
+5128e-01, 6.65898e-01, 6.73164e-01, 6.83716e-01, 6.89098e-01, 7.32921e-01, 7.34155e-01​‌​
+, 7.35239e-01, 7.37099e-01, 7.40341e-01, 7.53350e-01, 7.62701e-01, 7.66530e-01, 7.6686​‌​
+8e-01, 7.70601e-01] [Hz]                                                              
+  4.450920 seconds (1.90 M allocations: 657.567 MiB, 0.28% gc time, 7.27% compilation 
+time)                                                                                 
+Eigenvalues: [7.70601e-01, 7.66868e-01, 7.66530e-01, 7.62701e-01, 7.53350e-01, 7.40341​‌​
+e-01, 7.37099e-01, 7.35239e-01, 7.34155e-01, 7.32921e-01, 6.89098e-01, 6.83716e-01, 6.​‌​
+73164e-01, 6.65898e-01, 6.65128e-01, 6.61011e-01, 6.60112e-01, 6.59238e-01, 6.52749e-0​‌​
+1, 6.51026e-01, 6.50614e-01, 6.43355e-01, 6.05802e-01, 6.05079e-01, 6.04877e-01, 5.738​‌​
+90e-01, 5.73539e-01, 5.68722e-01, 5.45957e-01, 5.45710e-01, 5.20725e-01, 5.20341e-01, 
+5.15129e-01, 5.07232e-01, 4.95509e-01, 4.95228e-01, 4.90998e-01, 4.55884e-01, 4.55020e​‌​
+-01, 4.54362e-01, 4.54334e-01, 4.53473e-01, 4.52967e-01, 4.05636e-01, 4.05492e-01, 3.9​‌​
+9573e-01, 3.57918e-01, 3.57552e-01, 3.57428e-01, 3.53351e-01, 3.52430e-01, 3.51863e-01​‌​
+, 2.60642e-01, 2.59393e-01, 3.01726e-07, 2.39589e-07, 1.96941e-07, 1.35391e-07, 0.0000​‌​
+0e+00, 0.00000e+00] [Hz]                                                              
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 17                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 80                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 23                                                               
+Iteration 2: nconv = 27                                                               
+Iteration 3: nconv = 35                                                               
+Iteration 4: nconv = 36                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 49                                                               
+Iteration 2: nconv = 49                                                               
+Iteration 3: nconv = 52                                                               
+Iteration 4: nconv = 61                                                               
+  4.245268 seconds (1.43 k allocations: 1.059 GiB, 0.45% gc time)                     
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 23                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 50                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 72                                                               
+  3.689224 seconds (703 allocations: 963.540 MiB, 0.95% gc time)                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=60, eigs                                                         
+  5.017720 seconds (11.94 k allocations: 660.077 MiB, 1.11% gc time)                  
+Eigenvalues: [0.00000e+00, 0.00000e+00, 1.35391e-07, 1.96941e-07, 2.39589e-07, 3.01726​‌​
+e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.​‌​
+57552e-01, 3.57918e-01, 3.99573e-01, 4.05492e-01, 4.05636e-01, 4.52967e-01, 4.53473e-0​‌​
+1, 4.54334e-01, 4.54362e-01, 4.55020e-01, 4.55884e-01, 4.90998e-01, 4.95228e-01, 4.955​‌​
+09e-01, 5.07232e-01, 5.15129e-01, 5.20341e-01, 5.20725e-01, 5.45710e-01, 5.45957e-01, 
+5.68722e-01, 5.73539e-01, 5.73890e-01, 6.04877e-01, 6.05079e-01, 6.05802e-01, 6.43355e​‌​
+-01, 6.50614e-01, 6.51026e-01, 6.52749e-01, 6.59238e-01, 6.60112e-01, 6.61011e-01, 6.6​‌​
+5128e-01, 6.65898e-01, 6.73164e-01, 6.83716e-01, 6.89098e-01, 7.32921e-01, 7.34155e-01​‌​
+, 7.35239e-01, 7.37099e-01, 7.40341e-01, 7.53350e-01, 7.62701e-01, 7.66530e-01, 7.6686​‌​
+8e-01, 7.70601e-01] [Hz]                                                              
+  4.110053 seconds (3.97 k allocations: 567.019 MiB, 0.25% gc time)                   
+Eigenvalues: [7.70601e-01, 7.66868e-01, 7.66530e-01, 7.62701e-01, 7.53350e-01, 7.40341​‌​
+e-01, 7.37099e-01, 7.35239e-01, 7.34155e-01, 7.32921e-01, 6.89098e-01, 6.83716e-01, 6.​‌​
+73164e-01, 6.65898e-01, 6.65128e-01, 6.61011e-01, 6.60112e-01, 6.59238e-01, 6.52749e-0​‌​
+1, 6.51026e-01, 6.50614e-01, 6.43355e-01, 6.05802e-01, 6.05079e-01, 6.04877e-01, 5.738​‌​
+90e-01, 5.73539e-01, 5.68722e-01, 5.45957e-01, 5.45710e-01, 5.20725e-01, 5.20341e-01, 
+5.15129e-01, 5.07232e-01, 4.95509e-01, 4.95228e-01, 4.90998e-01, 4.55884e-01, 4.55020e​‌​
+-01, 4.54362e-01, 4.54334e-01, 4.53473e-01, 4.52967e-01, 4.05636e-01, 4.05492e-01, 3.9​‌​
+9573e-01, 3.57918e-01, 3.57552e-01, 3.57428e-01, 3.53351e-01, 3.52430e-01, 3.51863e-01​‌​
+, 2.60642e-01, 2.59393e-01, 3.01726e-07, 2.39589e-07, 1.96941e-07, 1.35391e-07, 0.0000​‌​
+0e+00, 0.00000e+00] [Hz]                                                              
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 16                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 80                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 23                                                               
+Iteration 2: nconv = 27                                                               
+Iteration 3: nconv = 32                                                               
+Iteration 4: nconv = 36                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 48                                                               
+Iteration 2: nconv = 49                                                               
+Iteration 3: nconv = 52                                                               
+Iteration 4: nconv = 59                                                               
+Iteration 5: nconv = 67                                                               
+  4.661774 seconds (1.49 k allocations: 1.115 GiB, 0.15% gc time)                     
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 23                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 50                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 74                                                               
+  3.749879 seconds (707 allocations: 963.540 MiB, 2.19% gc time)                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+WARNING: replacing module unit_cube_tet_examples.                                     
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=60, eigs                                                         
+  4.916425 seconds (11.95 k allocations: 660.190 MiB, 0.35% gc time)                  
+Eigenvalues: [0.00000e+00, 0.00000e+00, 1.35391e-07, 1.96941e-07, 2.39589e-07, 3.01726​‌​
+e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.​‌​
+57552e-01, 3.57918e-01, 3.99573e-01, 4.05492e-01, 4.05636e-01, 4.52967e-01, 4.53473e-0​‌​
+1, 4.54334e-01, 4.54362e-01, 4.55020e-01, 4.55884e-01, 4.90998e-01, 4.95228e-01, 4.955​‌​
+09e-01, 5.07232e-01, 5.15129e-01, 5.20341e-01, 5.20725e-01, 5.45710e-01, 5.45957e-01, 
+5.68722e-01, 5.73539e-01, 5.73890e-01, 6.04877e-01, 6.05079e-01, 6.05802e-01, 6.43355e​‌​
+-01, 6.50614e-01, 6.51026e-01, 6.52749e-01, 6.59238e-01, 6.60112e-01, 6.61011e-01, 6.6​‌​
+5128e-01, 6.65898e-01, 6.73164e-01, 6.83716e-01, 6.89098e-01, 7.32921e-01, 7.34155e-01​‌​
+, 7.35239e-01, 7.37099e-01, 7.40341e-01, 7.53350e-01, 7.62701e-01, 7.66530e-01, 7.6686​‌​
+8e-01, 7.70601e-01] [Hz]                                                              
+  4.472772 seconds (1.83 M allocations: 660.607 MiB, 0.33% gc time, 8.23% compilation 
+time)                                                                                 
+Eigenvalues: [0.00000e+00, 0.00000e+00, 1.35391e-07, 1.96940e-07, 2.39589e-07, 3.01726​‌​
+e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.​‌​
+57552e-01, 3.57918e-01, 3.99573e-01, 4.05492e-01, 4.05636e-01, 4.52967e-01, 4.53473e-0​‌​
+1, 4.54334e-01, 4.54362e-01, 4.55020e-01, 4.55884e-01, 4.90998e-01, 4.95228e-01, 4.955​‌​
+09e-01, 5.07232e-01, 5.15129e-01, 5.20341e-01, 5.20725e-01, 5.45710e-01, 5.45957e-01, 
+5.68722e-01, 5.73539e-01, 5.73890e-01, 6.04877e-01, 6.05079e-01, 6.05802e-01, 6.43355e​‌​
+-01, 6.50614e-01, 6.51026e-01, 6.52749e-01, 6.59238e-01, 6.60112e-01, 6.61011e-01, 6.6​‌​
+5128e-01, 6.65898e-01, 6.73164e-01, 6.83716e-01, 6.89098e-01, 7.32921e-01, 7.34155e-01​‌​
+, 7.35239e-01, 7.37099e-01, 7.40341e-01, 7.53350e-01, 7.62701e-01, 7.66530e-01, 7.6686​‌​
+8e-01, 7.70601e-01] [Hz]                                                              
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 9                                                                
+Iteration 4: nconv = 16                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 80                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 24                                                               
+Iteration 2: nconv = 28                                                               
+Iteration 3: nconv = 32                                                               
+Iteration 4: nconv = 37                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 45                                                               
+Iteration 2: nconv = 50                                                               
+Iteration 3: nconv = 51                                                               
+Iteration 4: nconv = 60                                                               
+  4.367628 seconds (1.45 k allocations: 1.059 GiB, 0.78% gc time)                     
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 23                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 50                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 71                                                               
+  3.618093 seconds (677 allocations: 963.540 MiB, 0.46% gc time)                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=60, eigs                                                         
+  4.924048 seconds (11.96 k allocations: 660.303 MiB, 0.25% gc time)                  
+Eigenvalues: [0.00000e+00, 0.00000e+00, 1.35392e-07, 1.96941e-07, 2.39589e-07, 3.01726​‌​
+e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.​‌​
+57552e-01, 3.57918e-01, 3.99573e-01, 4.05492e-01, 4.05636e-01, 4.52967e-01, 4.53473e-0​‌​
+1, 4.54334e-01, 4.54362e-01, 4.55020e-01, 4.55884e-01, 4.90998e-01, 4.95228e-01, 4.955​‌​
+09e-01, 5.07232e-01, 5.15129e-01, 5.20341e-01, 5.20725e-01, 5.45710e-01, 5.45957e-01, 
+5.68722e-01, 5.73539e-01, 5.73890e-01, 6.04877e-01, 6.05079e-01, 6.05802e-01, 6.43355e​‌​
+-01, 6.50614e-01, 6.51026e-01, 6.52749e-01, 6.59238e-01, 6.60112e-01, 6.61011e-01, 6.6​‌​
+5128e-01, 6.65898e-01, 6.73164e-01, 6.83716e-01, 6.89098e-01, 7.32921e-01, 7.34155e-01​‌​
+, 7.35239e-01, 7.37099e-01, 7.40341e-01, 7.53350e-01, 7.62701e-01, 7.66530e-01, 7.6686​‌​
+8e-01, 7.70601e-01] [Hz]                                                              
+  4.098291 seconds (4.07 k allocations: 573.774 MiB, 0.35% gc time)                   
+Eigenvalues: [0.00000e+00, 0.00000e+00, 1.35391e-07, 1.96940e-07, 2.39589e-07, 3.01726​‌​
+e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.​‌​
+57552e-01, 3.57918e-01, 3.99573e-01, 4.05492e-01, 4.05636e-01, 4.52967e-01, 4.53473e-0​‌​
+1, 4.54334e-01, 4.54362e-01, 4.55020e-01, 4.55884e-01, 4.90998e-01, 4.95228e-01, 4.955​‌​
+09e-01, 5.07232e-01, 5.15129e-01, 5.20341e-01, 5.20725e-01, 5.45710e-01, 5.45957e-01, 
+5.68722e-01, 5.73539e-01, 5.73890e-01, 6.04877e-01, 6.05079e-01, 6.05802e-01, 6.43355e​‌​
+-01, 6.50614e-01, 6.51026e-01, 6.52749e-01, 6.59238e-01, 6.60112e-01, 6.61011e-01, 6.6​‌​
+5128e-01, 6.65898e-01, 6.73164e-01, 6.83716e-01, 6.89098e-01, 7.32921e-01, 7.34155e-01​‌​
+, 7.35239e-01, 7.37099e-01, 7.40341e-01, 7.53350e-01, 7.62701e-01, 7.66530e-01, 7.6686​‌​
+8e-01, 7.70601e-01] [Hz]                                                              
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 15                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 80                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 24                                                               
+Iteration 2: nconv = 28                                                               
+Iteration 3: nconv = 33                                                               
+Iteration 4: nconv = 35                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 48                                                               
+Iteration 2: nconv = 50                                                               
+Iteration 3: nconv = 50                                                               
+Iteration 4: nconv = 60                                                               
+  4.280572 seconds (1.36 k allocations: 1.059 GiB, 0.31% gc time)                     
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 23                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 50                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 72                                                               
+  3.682602 seconds (687 allocations: 963.540 MiB, 1.62% gc time)                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+WARNING: replacing module unit_cube_tet_examples.                                     
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=60, eigs                                                         
+  4.919398 seconds (11.94 k allocations: 660.077 MiB, 0.25% gc time)                  
+  4.393379 seconds (1.74 M allocations: 656.225 MiB, 0.36% gc time, 7.12% compilation 
+time)                                                                                 
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 16                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 80                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 25                                                               
+Iteration 2: nconv = 29                                                               
+Iteration 3: nconv = 33                                                               
+Iteration 4: nconv = 35                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 45                                                               
+Iteration 2: nconv = 50                                                               
+Iteration 3: nconv = 52                                                               
+Iteration 4: nconv = 60                                                               
+  4.336877 seconds (1.45 k allocations: 1.059 GiB, 0.85% gc time)                     
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 22                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 50                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 72                                                               
+  3.583431 seconds (675 allocations: 963.540 MiB, 0.39% gc time)                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=60, eigs                                                         
+  4.905333 seconds (12.16 k allocations: 660.193 MiB, 0.67% gc time)                  
+  3.517501 seconds (3.20 k allocations: 559.643 MiB, 0.32% gc time)                   
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 16                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 80                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 24                                                               
+Iteration 2: nconv = 28                                                               
+Iteration 3: nconv = 32                                                               
+Iteration 4: nconv = 36                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 46                                                               
+Iteration 2: nconv = 50                                                               
+Iteration 3: nconv = 51                                                               
+Iteration 4: nconv = 58                                                               
+Iteration 5: nconv = 69                                                               
+  4.668555 seconds (1.46 k allocations: 1.115 GiB, 1.29% gc time)                     
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=60, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 22                                                               
+Number of requested eigenvalues: 40, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 50                                                               
+Number of requested eigenvalues: 60, number of iteration vectors: 120                 
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 72                                                               
+  3.836357 seconds (670 allocations: 963.540 MiB, 4.44% gc time)                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\experiments\\cube_exper​‌​
+iments.jl")                                                                           
+WARNING: replacing module unit_cube_tet_examples.                                     
+[ Info: size(M) = (2187, 2187)                                                        
+[ Info: N=8, neigvs=20, eigs                                                          
+  0.253685 seconds (4.97 k allocations: 49.992 MiB)                                   
+Eigenvalues: [0.00000e+00, 0.00000e+00, 0.00000e+00, 6.51231e-08, 9.41379e-08, 1.30533​‌​
+e-07, 2.51509e-01, 2.56099e-01, 3.37083e-01, 3.39137e-01, 3.42637e-01, 3.48691e-01, 3.​‌​
+49059e-01, 3.50360e-01, 3.77198e-01, 3.96918e-01, 3.97757e-01, 4.27836e-01, 4.29423e-0​‌​
+1, 4.30705e-01] [Hz]                                                                  
+  0.622504 seconds (1.74 M allocations: 125.445 MiB, 67.73% compilation time)         
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=8, neigvs=20, ssit                                                          
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 13                                                               
+Iteration 5: nconv = 17                                                               
+Iteration 6: nconv = 20                                                               
+  0.272769 seconds (499 allocations: 57.838 MiB)                                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=8, neigvs=20, ssit                                                          
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 13                                                               
+Iteration 5: nconv = 16                                                               
+Iteration 6: nconv = 23                                                               
+  0.134443 seconds (497 allocations: 57.837 MiB)                                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: size(M) = (2187, 2187)                                                        
+[ Info: N=8, neigvs=20, eigs                                                          
+  0.307185 seconds (5.59 k allocations: 51.361 MiB)                                   
+Eigenvalues: [0.00000e+00, 0.00000e+00, 0.00000e+00, 6.51244e-08, 9.41377e-08, 1.30533​‌​
+e-07, 2.51509e-01, 2.56099e-01, 3.37083e-01, 3.39137e-01, 3.42637e-01, 3.48691e-01, 3.​‌​
+49059e-01, 3.50360e-01, 3.77198e-01, 3.96918e-01, 3.97757e-01, 4.27836e-01, 4.29423e-0​‌​
+1, 4.30705e-01] [Hz]                                                                  
+  0.221169 seconds (2.02 k allocations: 42.982 MiB, 19.05% gc time)                   
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=8, neigvs=20, ssit                                                          
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 12                                                               
+Iteration 5: nconv = 17                                                               
+Iteration 6: nconv = 20                                                               
+  0.133239 seconds (498 allocations: 57.837 MiB)                                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=8, neigvs=20, ssit                                                          
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 13                                                               
+Iteration 5: nconv = 17                                                               
+Iteration 6: nconv = 21                                                               
+  0.123671 seconds (496 allocations: 57.837 MiB)                                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=20, eigs                                                         
+  2.700354 seconds (5.70 k allocations: 554.631 MiB, 1.38% gc time)                   
+Eigenvalues: [0.00000e+00, 0.00000e+00, 1.35392e-07, 1.96940e-07, 2.39589e-07, 3.01726​‌​
+e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.​‌​
+57552e-01, 3.57918e-01, 3.99573e-01, 4.05492e-01, 4.05636e-01, 4.52967e-01, 4.53473e-0​‌​
+1, 4.54334e-01] [Hz]                                                                  
+  2.077744 seconds (1.70 k allocations: 495.642 MiB, 0.49% gc time)                   
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=20, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 16                                                               
+Iteration 5: nconv = 22                                                               
+  1.571750 seconds (593 allocations: 572.305 MiB, 0.44% gc time)                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=20, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 15                                                               
+Iteration 5: nconv = 18                                                               
+Iteration 6: nconv = 24                                                               
+  1.663744 seconds (506 allocations: 591.140 MiB, 0.40% gc time)                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: size(M) = (14739, 14739)                                                      
+[ Info: N=16, neigvs=20, eigs                                                         
+  2.484806 seconds (5.03 k allocations: 544.815 MiB, 1.42% gc time)                   
+Eigenvalues: [0.00000e+00, 0.00000e+00, 1.35391e-07, 1.96941e-07, 2.39589e-07, 3.01726​‌​
+e-07, 2.59393e-01, 2.60642e-01, 3.51863e-01, 3.52430e-01, 3.53351e-01, 3.57428e-01, 3.​‌​
+57552e-01, 3.57918e-01, 3.99573e-01, 4.05492e-01, 4.05636e-01, 4.52967e-01, 4.53473e-0​‌​
+1, 4.54334e-01] [Hz]                                                                  
+  2.120306 seconds (1.64 k allocations: 494.702 MiB, 0.43% gc time)                   
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=20, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 14                                                               
+Iteration 5: nconv = 20                                                               
+  1.581999 seconds (586 allocations: 572.305 MiB, 0.39% gc time)                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=16, neigvs=20, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 15                                                               
+Iteration 5: nconv = 21                                                               
+  1.537515 seconds (456 allocations: 572.303 MiB, 0.52% gc time)                      
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: size(M) = (107811, 107811)                                                    
+[ Info: N=32, neigvs=20, eigs                                                         
+ 75.174240 seconds (5.09 k allocations: 8.227 GiB, 0.43% gc time)                     
+Eigenvalues: [0.00000e+00, 9.94472e-08, 3.34105e-07, 4.03922e-07, 5.12671e-07, 6.30936​‌​
+e-07, 2.61727e-01, 2.62041e-01, 3.55982e-01, 3.56129e-01, 3.56361e-01, 3.59778e-01, 3.​‌​
+59813e-01, 3.59909e-01, 4.06075e-01, 4.07645e-01, 4.07676e-01, 4.59447e-01, 4.59559e-0​‌​
+1, 4.60127e-01] [Hz]                                                                  
+ 99.809048 seconds (1.68 k allocations: 7.854 GiB, 0.03% gc time)                     
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=32, neigvs=20, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 16                                                               
+Iteration 5: nconv = 21                                                               
+185.366172 seconds (590 allocations: 8.391 GiB, 3.30% gc time)                        
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=32, neigvs=20, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 16                                                               
+Iteration 5: nconv = 21                                                               
+194.632262 seconds (457 allocations: 8.391 GiB, 6.43% gc time)                        
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: size(M) = (107811, 107811)                                                    
+[ Info: N=32, neigvs=20, eigs                                                         
+199.352428 seconds (5.09 k allocations: 8.221 GiB, 1.57% gc time)                     
+Eigenvalues: [0.00000e+00, 9.94472e-08, 3.34105e-07, 4.03922e-07, 5.12671e-07, 6.30936​‌​
+e-07, 2.61727e-01, 2.62041e-01, 3.55982e-01, 3.56129e-01, 3.56361e-01, 3.59778e-01, 3.​‌​
+59813e-01, 3.59909e-01, 4.06075e-01, 4.07645e-01, 4.07676e-01, 4.59447e-01, 4.59559e-0​‌​
+1, 4.60127e-01] [Hz]                                                                  
+105.491011 seconds (1.68 k allocations: 7.854 GiB, 0.30% gc time)                     
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=32, neigvs=20, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 15                                                               
+Iteration 5: nconv = 18                                                               
+Iteration 6: nconv = 27                                                               
+108.967416 seconds (645 allocations: 8.523 GiB, 1.21% gc time)                        
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+[ Info: N=32, neigvs=20, ssit                                                         
+Number of requested eigenvalues: 20, number of iteration vectors: 40                  
+Iteration 0: nconv = 0                                                                
+Iteration 1: nconv = 1                                                                
+Iteration 2: nconv = 6                                                                
+Iteration 3: nconv = 8                                                                
+Iteration 4: nconv = 15                                                               
+Iteration 5: nconv = 22                                                               
+113.583062 seconds (459 allocations: 8.391 GiB, 3.10% gc time)                        
+norm(fs - reffs) / norm(reffs) < tol = true                                           
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\qrexp.jl")             
+Threads.nthreads() = 1                                                                
+[ Info: Matrix size: (400000, 1000)                                                   
+[ Info: mgsortho!(A)                                                                  
+256.572901 seconds (129.62 k allocations: 7.082 MiB, 0.10% compilation time)          
+norm(A' * A - LinearAlgebra.I, Inf) = 5.21775e-15                                     
+[ Info: mgsorthotb!(A)                                                                
+ERROR: LoadError: UndefVarError: mgsorthot! not defined                               
+Stacktrace:                                                                           
+ [1] top-level scope                                                                  
+   @ .\timing.jl:262                                                                  
+ [2] include(fname::String)                                                           
+   @ Base.MainInclude .\client.jl:476                                                 
+ [3] top-level scope                                                                  
+   @ REPL[14]:1                                                                       
+in expression starting at C:\Users\pkonl\Documents\00WIP\SubSIt.jl\qrexp.jl:350       
+                                                                                      
+julia> include("C:\\Users\\pkonl\\Documents\\00WIP\\SubSIt.jl\\qrexp.jl")             
+Threads.nthreads() = 1                                                                
+[ Info: Matrix size: (400000, 1000)                                                   
+[ Info: mgsortho!(A)                                                                  
+257.689884 seconds (129.56 k allocations: 7.077 MiB, 0.12% compilation time)          
+norm(A' * A - LinearAlgebra.I, Inf) = 5.22813e-15                                     
+[ Info: mgsorthotb!(A)                                                                
+260.007411 seconds (60.92 k allocations: 3.518 MiB, 0.06% compilation time)           
+norm(A' * A - LinearAlgebra.I, Inf) = 5.22813e-15                                     
+                                                                                      
+julia> 
