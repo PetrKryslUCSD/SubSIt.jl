@@ -174,32 +174,51 @@ See also the documentation for Arpack `eigs`.
 function ssit(K, M; nev = 6, ncv=0, tol = 1.0e-3, maxiter = 300, verbose=false, which=:SM, X = fill(eltype(K), 0, 0), check=0, ritzvec=true, sigma=0.0) 
     which != :SM && error("Wrong type of eigenvalue requested; only :SM accepted")
     nev < 1 && error("Wrong number of eigenvalues: needs to be > 1") 
-
-    ncv_tactics(_nev) = min(_nev + 50, Int(round(_nev * 2.0)))
-    
-    _nev = max(Int(round(nev/4)+1), 20)
-    ncv = ncv_tactics(_nev)
-    if size(X) == (0, 0)
-        X = rand(eltype(M), (size(M, 1), ncv))  
-    else
+    if ncv <= 0 && size(X, 2) > 0
         ncv = size(X, 2)
-        ncv < nev+1 && error("Insufficient number of iteration vectors")
+        ncv < nev+1 && error("Insufficient number of iteration vectors: must be >= nev+1")
+    end
+
+    # Tactics to build up the iteration space by starting from a smaller
+    # number eigenvalues
+    _iteration_tactics(_nev) = begin
+        if ncv == 0 # Assume we can freely control the number of iteration vectors
+            # Increase the number of eigenvalues
+            _nev = min(nev, Int(round(_nev * 2)))
+            # ... and adjust the number of iteration vectors
+            _ncv = min(_nev + 100, Int(round(_nev * 2)))
+        else # otherwise we are constrained by the number of requested iteration vectors
+            _nev = nev
+            _ncv = ncv
+        end
+        _nev, _ncv
+    end
+
+    # Initial number of eigenvalues requested
+    _nev = max(Int(round(nev/4)+1), 20)
+
+    # If the number of iteration vectors was not specified, but we have the
+    # iteration vectors, we will go with that
+    _ncv = _iteration_tactics(_nev)[2]
+
+    if size(X) == (0, 0)
+        X = rand(eltype(M), (size(M, 1), _ncv))  
     end
 
     factor = cholesky(K)
-
     
     iter = 0
     while iter < maxiter
+        @show _nev, _ncv
         _maxiter = ifelse(_nev == nev, maxiter, 4)
         lamb, X, nconv, niter, lamberr = ss_iterate(factor, M, _nev, X, tol, iter, _maxiter, verbose) 
         if _nev == nev
             return lamb[1:nev], X[:, 1:nev], nconv, niter, lamberr
         end
-        _nev = _nev * 2
-        _nev = min(nev, _nev)
-        ncv = ncv_tactics(_nev)
-        X = hcat(X, rand(eltype(K), size(X, 1), ncv - size(X, 2)))
+        _nev, _ncv = _iteration_tactics(_nev)
+        if _ncv - size(X, 2) > 0
+            X = hcat(X, rand(eltype(K), size(X, 1), _ncv - size(X, 2)))
+        end
     end
     return nothing
 end
