@@ -15,7 +15,7 @@ function __colnorm(A, j)
     return sqrt(__coldot(A, j, j)); 
 end
 
-function colsubt!(A, i, j, r)
+function __colsubt!(A, i, j, r)
     m = size(A, 1)
     @simd for k in 1:m
         A[k, i] -= r * A[k, j]
@@ -35,7 +35,7 @@ function __mgsthr!(A)
     __normalizecol!(A, 1)
     for j in 2:n 
         Base.Threads.@threads for i in j:n
-            colsubt!(A, i, j-1, __coldot(A, j-1, i))
+            __colsubt!(A, i, j-1, __coldot(A, j-1, i))
         end
         __normalizecol!(A, j)
     end
@@ -58,6 +58,7 @@ function __mgsl3!(A)
     return A
 end
 
+# Copyright 2022, Michael Stewart
 function __mgs3thr!(A; block_size = 32)
     m, n = size(A)
     _one = one(eltype(A))
@@ -80,6 +81,7 @@ function __mgs3thr!(A; block_size = 32)
     return A
 end
 
+# Copyright 2022, Michael Stewart
 function __mgs3!(A; block_size = 32)
     m, n = size(A)
     _one = one(eltype(A))
@@ -102,7 +104,8 @@ function __mgs3!(A; block_size = 32)
     return A
 end
 
-function computeQ!(A)
+# Copyright 2022, Michael Stewart
+function __computeQ!(A)
     m, n = size(A)
     k = min(m, n)
     tau = zeros(eltype(A), k)
@@ -111,8 +114,8 @@ function computeQ!(A)
     return A
 end
 
-
-function computeQT!(A; nb = 32)
+# Copyright 2022, Michael Stewart
+function __computeQT!(A; nb = 32)
     m, n = size(A)
     k = min(m, n)
     T = zeros(eltype(A), nb, k)
@@ -195,7 +198,7 @@ function ssit(K, M; nev = 6, ncv=0, tol = 1.0e-3, maxiter = 300, verbose=false, 
     end
 
     # Initial number of eigenvalues requested
-    _nev = max(Int(round(nev/4)+1), 20)
+    _nev = ifelse(ncv == 0, max(Int(round(nev/4)+1), 20), nev)
 
     # If the number of iteration vectors was not specified, but we have the
     # iteration vectors, we will go with that
@@ -235,8 +238,8 @@ Iterate eigenvector subspace of the generalized eigenvalue problem
 * `X` =  initial guess of the eigenvectors, of dimension `size(M, 1)`x`ncv`,
     where `ncv > nev` = number of iteration vectors,
 * `tol` = relative tolerance on the eigenvalue, expressed in terms of norms 
-      of the change of the eigenvalue estimates from iteration to iteration.
-* `maxiter` =  maximum number of allowed iterations (default 300),
+      of the change of the eigenvalue estimates from iteration to iteration,
+* `maxiter` =  maximum number of allowed iterations,
 * `verbose` = verbose? (default is false).
 """
 function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose) 
@@ -252,6 +255,7 @@ function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose)
     converged = falses(nvecs)  # not yet
     nconv = 0
     __fastapproxqr! = (Threads.nthreads() > 1 ? __mgs3thr! : __mgs3!)
+    # __fastapproxqr! = __computeQT!
 
     niter = 0
     Z = X #  Z ← Xₖ
@@ -259,7 +263,7 @@ function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose)
         mul!(Y, M, Z) # Y ← M Xₖ
         Z .= K \ Y # Z ← ̅Xₖ₊₁ 
         mul!(Kr, Transpose(Z), Y) # ← ̅Xₖ₊₁ᵀ K ̅Xₖ₊₁ = ̅Xₖ₊₁ᵀ M Xₖ
-        mul!(Y, M, Z) # Y ← M̅Xₖ₊₁
+        mul!(Y, M, Z) # Y ← M X̅ₖ₊₁
         mul!(Mr, Transpose(Z), Y) # ← ̅Xₖ₊₁ᵀ M ̅Xₖ₊₁
         decomp = eigen(Kr, Mr)
         ix = sortperm(real.(decomp.values))
