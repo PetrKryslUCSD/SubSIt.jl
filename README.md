@@ -10,3 +10,4 @@ A couple of twists have been added, which seem to improve convergence.
 This package is sometimes slower than Arpack, but generally only 10-20%.
 Other times it can be faster than  Arpack.
 
+With contributions of Michael Stewart.
