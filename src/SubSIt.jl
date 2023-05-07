@@ -270,8 +270,6 @@ function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose)
         lamb .= real.(@view decomp.values[ix])
         Pr .= real.(@view decomp.vectors[:, ix])
         mul!(Y, Z, Pr) #  Xₖ₊₁ ← ̅Xₖ₊₁ Pᵣ
-        __fastapproxqr!(Y) # orthonormalize the vectors in the subspace
-        Z, Y = Y, Z # Z ←  Xₖ₊₁, Y is scratch space
         @. lamberr = abs(lamb - plamb) / abs(plamb)
         converged .= (lamberr .<= tol)
         nconv = length(findall(converged))
@@ -279,34 +277,25 @@ function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose)
         if nconv >= nev # converged on all requested eigenvalues
             break
         end
+        __fastapproxqr!(Y) # orthonormalize the vectors in the subspace
+        Z, Y = Y, Z # Z ←  Xₖ₊₁, Y is scratch space
         lamb, plamb = plamb, lamb
         niter = niter + 1
     end
-    return lamb, Z, nconv, niter, lamberr
+    return lamb, Y, nconv, niter, lamberr
+end
+
+"""
+    mass_orthogonalize!(v, M)
+
+Mass-orthogonalize vectors.
+"""
+function mass_orthogonalize!(v, M)
+    for i in axes(v, 2)
+        v[:, i] /= sqrt(dot(v[:, i], M * v[:, i]))
+    end
+    return v
 end
 
 
-end
-
-# function ssit(K, M; nev = 6, ncv=max(20, 2*nev+1), v0 = fill(eltype(K), 0, 0), tol = 1.0e-3, maxiter = 300, verbose=false, which=:SM, check=0) 
-#     @assert which == :SM
-#     @assert nev >= 1
-#     ncv = max(ncv, size(v0, 2))
-#     @assert nev < ncv
-#     nvecs = ncv
-#     if size(v0) == (0, 0)
-#         v0 = fill(zero(eltype(K)), size(K,1), nvecs)
-#         for j in axes(M, 1)
-#             v0[j, 1] = M[j, j]
-#         end
-#         dMK = diag(M) ./ diag(K)
-#         ix = sortperm(dMK)
-#         k = 1
-#         for j in 2:nvecs-1
-#             v0[ix[k], j] = 1.0
-#         end
-#         v0[:, end] = rand(size(K,1))
-#     end
-#     factor = cholesky(K)
-#     return ss_iterate(factor, M, nev, v0, tol, maxiter, verbose) 
-# end
+end # module
