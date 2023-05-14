@@ -20,12 +20,12 @@ function unzip(file,exdir="")
     close(zarchive)
 end
 
-@testset "Incompressible cube" begin
-    include("test_cube.jl")
-end
-
 @testset "Truncated cylindrical solid shell" begin
     include("test_trunc_cyl_shell.jl")
+end
+
+@testset "Incompressible cube" begin
+    include("test_cube.jl")
 end
 
 @testset "Barrel shell" begin
