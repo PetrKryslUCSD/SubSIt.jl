@@ -262,11 +262,11 @@ function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose)
     Z = X #  Z ← Xₖ
     for i in iter:maxiter
         mul!(Y, M, Z) # Y ← M Xₖ
-        Z .= K \ Y # Z ← ̅Xₖ₊₁ 
+        Z .= Kfactor \ Y # Z ← ̅Xₖ₊₁
         mul!(Kr, Transpose(Z), Y) # ← ̅Xₖ₊₁ᵀ K ̅Xₖ₊₁ = ̅Xₖ₊₁ᵀ M Xₖ
         mul!(Y, M, Z) # Y ← M X̅ₖ₊₁
         mul!(Mr, Transpose(Z), Y) # ← ̅Xₖ₊₁ᵀ M ̅Xₖ₊₁
-        decomp = eigen(Kr, Mr)
+        decomp = eigen(Symmetric(Kr), Symmetric(Mr))
         ix = sortperm(real.(decomp.values))
         lamb .= real.(@view decomp.values[ix])
         Pr .= real.(@view decomp.vectors[:, ix])
