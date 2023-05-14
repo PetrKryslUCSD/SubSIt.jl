@@ -209,13 +209,14 @@ function ssit(K, M; nev = 6, ncv=0, tol = 1.0e-3, maxiter = 300, verbose=false, 
         X = rand(eltype(M), (size(M, 1), _ncv))  
     end
 
-    factor = cholesky(K)
+    Kfactor = cholesky(K)
     
     iter = 0
     while iter < maxiter
         _maxiter = ifelse(_nev == nev, maxiter, 4)
-        lamb, X, nconv, niter, lamberr = ss_iterate(factor, M, _nev, X, tol, iter, _maxiter, verbose) 
+        lamb, X, nconv, niter, lamberr = ss_iterate(Kfactor, M, _nev, X, tol, iter, _maxiter, verbose)
         if _nev == nev
+            __mass_orthogonalize!(X, M)
             return lamb[1:nev], X[:, 1:nev], nconv, niter, lamberr
         end
         _nev, _ncv = _iteration_tactics(_nev)
