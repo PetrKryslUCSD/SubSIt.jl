@@ -4,7 +4,7 @@ using FinEtools
 using FinEtoolsDeforLinear
 using LinearAlgebra
 using Arpack
-using SubSIt: ssit
+using SubSIt: ssit, check_M_orthogonality, check_K_orthogonality
 
 function trunc_cyl_shell()
     println("""
@@ -54,24 +54,28 @@ function trunc_cyl_shell()
     M =mass(femm, geom, u)
     
     tim = @elapsed begin
-        evals, evecs, convinfo = ssit(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs)
-    end
-    @show convinfo
-    evals[:] = evals .- OmegaShift;
-    fs = real(sqrt.(complex(evals)))/(2*pi)
-    @info "Frequencies: $(round.(fs[7:15], digits=4))"
-    @info "SubSIt: Time $tim [sec]"
-    reffs = fs
-
-    tim = @elapsed begin
         evals, evecs, convinfo = eigs(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, which=:SM, explicittransform=:none)
     end
     @show convinfo
     evals[:] = evals .- OmegaShift;
     fs = real(sqrt.(complex(evals)))/(2*pi)
+    @test max(check_M_orthogonality(evecs, M)...) < 1.0e-3
+    @test max(check_K_orthogonality(evals, evecs, K)...) < 1.0e-3
     @info "Frequencies: $(round.(fs[7:15], digits=4))"
     @info "Arpack: Time $tim [sec]"
+    reffs = fs
+
+    tim = @elapsed begin
+        evals, evecs, convinfo = ssit(Symmetric(K+OmegaShift*M), Symmetric(M); nev=neigvs, verbose=true)
+    end
+    @show convinfo
+    evals[:] = evals .- OmegaShift;
+    fs = real(sqrt.(complex(evals)))/(2*pi)
     @test norm(reffs - fs) / norm(reffs) < 1.0e-3
+    @test max(check_M_orthogonality(evecs, M)...) < 1.0e-3
+    @test max(check_K_orthogonality(evals, evecs, K)...) < 1.0e-3
+    @info "Frequencies: $(round.(fs[7:15], digits=4))"
+    @info "SubSIt: Time $tim [sec]"
 
 
     tim = @elapsed begin
@@ -80,6 +84,9 @@ function trunc_cyl_shell()
     @show convinfo
     evals[:] = evals .- OmegaShift;
     fs = real(sqrt.(complex(evals)))/(2*pi)
+    @test norm(reffs - fs) / norm(reffs) < 1.0e-3
+    @test max(check_M_orthogonality(evecs, M)...) < 1.0e-3
+    @test max(check_K_orthogonality(evals, evecs, K)...) < 1.0e-3
     @info "Frequencies: $(round.(fs[7:15], digits=4))"
     @info "SubSIt: Time $tim [sec]"
 

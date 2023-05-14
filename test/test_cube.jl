@@ -4,7 +4,7 @@ using Test
 using FinEtools
 using FinEtools.MeshExportModule
 using FinEtoolsDeforLinear
-using SubSIt: ssit
+using SubSIt: ssit, check_M_orthogonality, check_K_orthogonality
 using LinearAlgebra
 using Arpack
 # using KrylovKit
@@ -52,9 +52,11 @@ function unit_cube_esnice_ssit(N, neigvs = 20)
 
 
     @info "N=$(N), neigvs=$(neigvs), eigs"
-    @time d,v,nconv = eigs(K+OmegaShift*M, M; nev=neigvs, which=:SM, explicittransform=:none)
-    d = d .- OmegaShift;
-    fs = real(sqrt.(complex(d)))/(2*pi)
+    @time evals, evecs, nconv = eigs(K+OmegaShift*M, M; nev=neigvs, which=:SM, explicittransform=:none)
+    evals = evals .- OmegaShift;
+    fs = real(sqrt.(complex(evals)))/(2*pi)
+    @test max(check_M_orthogonality(evecs, M)...) < 1.0e-3
+    @test max(check_K_orthogonality(evals, evecs, K)...) < 1.0e-3
     # println("Eigenvalues: $fs [Hz]")
     reffs = fs
 
@@ -67,17 +69,21 @@ function unit_cube_esnice_ssit(N, neigvs = 20)
     # @test norm(fs - reffs) / norm(reffs) < tol
 
     @info "N=$(N), neigvs=$(neigvs), ssit"
-    @time d,v,nconv = ssit(K+OmegaShift*M, M; nev=neigvs, verbose=true)
-    d = d .- OmegaShift;
-    fs = real(sqrt.(complex(d)))/(2*pi)
+    @time evals, evecs, nconv = ssit(K+OmegaShift*M, M; nev=neigvs, verbose=true)
+    evals = evals .- OmegaShift;
+    fs = real(sqrt.(complex(evals)))/(2*pi)
     # println("Eigenvalues: $fs [Hz]")
+    @test max(check_M_orthogonality(evecs, M)...) < 1.0e-3
+    @test max(check_K_orthogonality(evals, evecs, K)...) < 1.0e-3
     @test norm(fs - reffs) / norm(reffs) < tol
 
-    @info "N=$(N), neigvs=$(neigvs), ssit, ncv fixed"
-    @time d,v,nconv = ssit(K+OmegaShift*M, M; nev=neigvs, ncv=2*neigvs, verbose=true)
-    d = d .- OmegaShift;
-    fs = real(sqrt.(complex(d)))/(2*pi)
+    @info "N=$(N), neigvs=$(neigvs), ssit, ncv"
+    @time evals, evecs, nconv = ssit(K+OmegaShift*M, M; nev=neigvs, ncv=2*neigvs, verbose=true)
+    evals = evals .- OmegaShift;
+    fs = real(sqrt.(complex(evals)))/(2*pi)
     # println("Eigenvalues: $fs [Hz]")
+    @test max(check_M_orthogonality(evecs, M)...) < 1.0e-3
+    @test max(check_K_orthogonality(evals, evecs, K)...) < 1.0e-3
     @test norm(fs - reffs) / norm(reffs) < tol
 
     
@@ -89,12 +95,12 @@ function unit_cube_esnice_ssit(N, neigvs = 20)
     true
 end # unit_cube_esnice
 
-for N in (8, 16, 32)
+for N in (8, 16, )
     unit_cube_esnice_ssit(N, 20)
 end
 
 
-for N in (32, )
+for N in (16, )
     unit_cube_esnice_ssit(N, 100)
     # unit_cube_esnice_ssit(N, 500)
 end

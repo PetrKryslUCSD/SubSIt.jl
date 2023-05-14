@@ -25,7 +25,7 @@ using FinEtoolsFlexStructures.FEMMShellT3FFModule
 using FinEtoolsFlexStructures.RotUtilModule: initial_Rfield, update_rotation_field!
 using DataDrop
 using DataDrop: with_extension
-using SubSIt: ssit
+using SubSIt: ssit, check_M_orthogonality, check_K_orthogonality
 using FinEtools.MeshExportModule.VTKWrite: vtkwrite
 
 function _execute_model(formul, input, visualize = true)
@@ -109,6 +109,8 @@ function _execute_model(formul, input, visualize = true)
     @show convinfo
     evals[:] = evals .- OmegaShift;
     fs = real(sqrt.(complex(evals)))/(2*pi)
+    @test max(check_M_orthogonality(evecs, M)...) < 1.0e-3
+    @test max(check_K_orthogonality(evals, evecs, K)...) < 1.0e-3
     @info "Frequencies: $(round.(fs[7:15], digits=4))"
     @info "Arpack: Time $tim [sec]"
     reffs = fs
@@ -120,6 +122,8 @@ function _execute_model(formul, input, visualize = true)
     @show convinfo
     evals[:] = evals .- OmegaShift;
     fs = real(sqrt.(complex(evals)))/(2*pi)
+    @test max(check_M_orthogonality(evecs, M)...) < 1.0e-3
+    @test max(check_K_orthogonality(evals, evecs, K)...) < 1.0e-3
     @info "Frequencies: $(round.(fs[7:15], digits=4))"
     @info "SubSIt: Time $tim [sec]"
     @test norm(reffs - fs, Inf) / norm(reffs, Inf) < 2.0e-3
@@ -131,6 +135,8 @@ function _execute_model(formul, input, visualize = true)
     @show convinfo
     evals[:] = evals .- OmegaShift;
     fs = real(sqrt.(complex(evals)))/(2*pi)
+    @test max(check_M_orthogonality(evecs, M)...) < 1.0e-3
+    @test max(check_K_orthogonality(evals, evecs, K)...) < 1.0e-3
     @info "Frequencies: $(round.(fs[7:15], digits=4))"
     @info "SubSIt w/ initial guess: Time $tim [sec]"
     @test norm(reffs - fs, Inf) / norm(reffs, Inf) < 2.0e-3
