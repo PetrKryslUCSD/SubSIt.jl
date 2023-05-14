@@ -175,7 +175,7 @@ See also the documentation for Arpack `eigs`.
 * `lamberr` = eigenvalue errors, defined as normalized  differences  of
     successive  estimates of the eigenvalues.
 """
-function ssit(K, M; nev = 6, ncv=0, tol = 1.0e-3, maxiter = 300, verbose=false, which=:SM, X = fill(eltype(K), 0, 0), check=0, ritzvec=true, sigma=0.0, explicittransform=:none) 
+function ssit(K, M; nev = 6, ncv=0, tol = 1.0e-4, maxiter = 300, verbose=false, which=:SM, X = fill(eltype(K), 0, 0), check=0, ritzvec=true, sigma=0.0, explicittransform=:none)
     which != :SM && error("Wrong type of eigenvalue requested; only :SM accepted")
     nev < 1 && error("Wrong number of eigenvalues: needs to be > 1") 
     if ncv <= 0 && size(X, 2) > 0
@@ -233,7 +233,7 @@ end
 Iterate eigenvector subspace of the generalized eigenvalue problem
 `K*X=M*X*Lambda`.
 
-* `K` = _factorization_ of the (mass-shifted) stiffness matrix,
+* `Kfactor` = _factorization_ of the (mass-shifted) stiffness matrix,
 * `M` =  square symmetric mass matrix,
 * `nev` = the number of eigenvalues sought,
 * `X` =  initial guess of the eigenvectors, of dimension `size(M, 1)`x`ncv`,
@@ -243,16 +243,17 @@ Iterate eigenvector subspace of the generalized eigenvalue problem
 * `maxiter` =  maximum number of allowed iterations,
 * `verbose` = verbose? (default is false).
 """
-function ss_iterate(K, M, nev, X, tol, iter, maxiter, verbose) 
+function ss_iterate(Kfactor, M, nev, X, tol, iter, maxiter, verbose)
     nvecs = size(X, 2)
     verbose && println("Number of requested eigenvalues: $nev, number of iteration vectors: $nvecs")
     Y = deepcopy(X)
-    Kr = fill(zero(eltype(K)), nvecs, nvecs)
-    Mr = fill(zero(eltype(K)), nvecs, nvecs)
-    Pr = fill(zero(eltype(K)), nvecs, nvecs)
-    plamb = fill(zero(eltype(K)), nvecs) .+ Inf
-    lamb = fill(zero(eltype(K)), nvecs)
-    lamberr = fill(zero(eltype(K)), nvecs)
+    T = eltype(X)
+    Kr = fill(zero(T), nvecs, nvecs)
+    Mr = fill(zero(T), nvecs, nvecs)
+    Pr = fill(zero(T), nvecs, nvecs)
+    plamb = fill(zero(T), nvecs) .+ Inf
+    lamb = fill(zero(T), nvecs)
+    lamberr = fill(zero(T), nvecs)
     converged = falses(nvecs)  # not yet
     nconv = 0
     __fastapproxqr! = (Threads.nthreads() > 1 ? __mgs3thr! : __mgs3!)
