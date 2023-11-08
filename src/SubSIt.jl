@@ -1,7 +1,6 @@
 module SubSIt
 
 using LinearAlgebra
-using MKL
 
 # function __coldot(A, j, i)
 #     m = size(A, 1)
