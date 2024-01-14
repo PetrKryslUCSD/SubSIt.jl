@@ -218,7 +218,7 @@ function ssit(K, M; nev = 6, ncv=0, tol = 1.0e-4, maxiter = 300, verbose=false, 
     while iter < maxiter
         _maxiter = ifelse(_nev == nev, maxiter, 8)
         lamb, X, nconv, niter, lamberr = ss_iterate(Kfactor, M, _nev, X, tol, iter, _maxiter, verbose)
-        if _nev == nev
+        if _nev == nev && nconv >= nev
             __mass_orthogonalize!(X, M)
             return lamb[1:nev], X[:, 1:nev], nconv, niter, lamberr
         end
