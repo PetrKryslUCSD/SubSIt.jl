@@ -202,7 +202,7 @@ function ssit(K, M; nev = 6, ncv=0, tol = 1.0e-4, maxiter = 300, verbose=false, 
     end
 
     # Initial number of eigenvalues requested
-    _nev = ifelse(ncv == 0, max(Int(round(nev/4)+1), 20), nev)
+    _nev = ifelse(ncv == 0, max(Int(round(nev/4)+1), min(nev, 20)), nev)
 
     # If the number of iteration vectors was not specified, but we have the
     # iteration vectors, we will go with that
