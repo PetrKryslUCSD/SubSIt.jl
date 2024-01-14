@@ -267,7 +267,7 @@ function ss_iterate(Kfactor, M, nev, X, tol, iter, maxiter, verbose)
     Z = X #  Z ← Xₖ
     for i in iter:maxiter
         mul!(Y, M, Z) # Y ← M Xₖ
-        Z .= Kfactor \ Y
+        Z .= Kfactor \ Y # Z ← ̅Xₖ₊₁
         # begin
         #     Threads.@threads for i in axes(Y, 2)
         #         @views Z[:, i] .= Kfactor \ Y[:, i] # Z ← ̅Xₖ₊₁
