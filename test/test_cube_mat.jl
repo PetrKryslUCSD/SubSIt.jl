@@ -16,6 +16,11 @@ orthogonality_tol = 1.0e-9
 frequency_tol = 1.0e-6
 residual_tol = 1.0e-6
 
+b = "unit_cube_tet-16"
+if !isfile(joinpath(dirname(@__FILE__()), b * ".h5"))
+    success(run(`unzip -qq -d $(dirname(@__FILE__())) $(joinpath(dirname(@__FILE__()), "unit_cube.zip"))`; wait = false))
+end
+
 let
 
     omega_shift = 2 * pi * 0.1

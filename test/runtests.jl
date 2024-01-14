@@ -20,6 +20,10 @@ function unzip(file,exdir="")
     close(zarchive)
 end
 
+@testset "Incompressible cube given by matrices" begin
+    include("test_cube_mat.jl")
+end
+
 @testset "Truncated cylindrical solid shell" begin
     include("test_trunc_cyl_shell.jl")
 end
