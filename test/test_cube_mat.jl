@@ -35,7 +35,7 @@ let
         for neigvs in [3, 6, 9, 12, 17, 20]
             @info "Number of eigenvalues $(neigvs)"
 
-            @time d, v, nconv = ssit(K+omega_shift^2*M, M; nev=neigvs, tol = 1.0e-8, verbose=true)
+            @time d, v, nconv = ssit(K+omega_shift^2*M, M; nev=neigvs, tol = 0.0, verbose=true)
             d .-= omega_shift^2
 
             @test length(d) == size(v, 2)
